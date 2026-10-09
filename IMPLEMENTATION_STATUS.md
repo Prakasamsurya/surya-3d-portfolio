@@ -4,7 +4,7 @@ Read this file before starting any task. If it disagrees with the repository, ve
 
 ## Current stage
 
-**Stage 3 — immersive scene redesign in progress; visual review pending.** The owner rejected the first room because the scene read as a flat content card beside low-detail desk props. The latest implementation replaces that set with the CC0 Downtown Office Interiors starter scene, widens the camera route, adds atmospheric lighting/fog, and art-directs the HTML panels as smaller alternating glass surfaces. Latest build for the redesign is pending. Browser rendering and camera alignment still require owner review.
+**Stage 3 — seven-chapter scroll-driven 3D redesign in progress; visual review pending.** The owner clarified that every section needs its own 3D animation and scroll-controlled transition, not a shared office backdrop. A new procedural chapter scene has been added for Intro, Skills, Experience, Projects, AI, Education and Contact, with different 3D forms and continuous scale/rotation transitions driven by each section's scroll position. Latest build is pending. Browser rendering, visual quality and performance still require review.
 
 ## Repository and branch
 
@@ -30,14 +30,15 @@ Read this file before starting any task. If it disagrees with the repository, ve
 ### Stage 3 — 3D greybox (in progress)
 - Verified stable package compatibility before adding 3D dependencies: React Three Fiber v9 pairs with React 19; the stable v9.8.1 release includes React 19.3 compatibility. Drei v10.7.9, Three.js v0.186.1, and @types/three v0.186.0 are stable releases.
 - Added `@react-three/fiber`, `@react-three/drei`, `three`, and `@types/three`. Did not add GSAP: the current greybox uses one shared scroll-progress value and a small camera interpolation loop instead.
-- Added `src/scene/roomLayout.ts`, `Room.tsx`, `ScrollCamera.tsx`, and `PortfolioScene.tsx`.
+- Added `src/scene/roomLayout.ts`, `Room.tsx`, `ScrollCamera.tsx`, `PortfolioScene.tsx`, and the new `ScrollStoryScene.tsx`.
 - Initial greybox used repeated procedural workstations; the owner rejected the result as visually unconvincing.
 - Researched scroll-driven WebGL portfolio principles: the 3D environment should be the experience, with purposeful camera motion, depth, lighting, and HTML content that remains readable. References: https://webflow.com/blog/3d-design-website and https://www.webgpu.com/showcase/joseph-santamaria-3d-webgl-portfolio/.
-- Replaced the earlier workstation model with the CC0 Downtown Office Interiors GLB starter scene (106 office assets, 9.4 MB total pack, 221,300 triangles): https://3dassets.dev/packs/downtown-office-interiors.
-- Removed the mismatched handmade wall planes; kept one broad grounding floor, adjusted the camera route across the scene, introduced fog and layered lighting, and reduced the panel width with alternating composition.
+- A first redesign replaced the workstation model with the CC0 Downtown Office Interiors GLB, but the owner clarified that this still missed the core requirement: every section must have its own 3D scene choreography.
+- Added `ScrollStoryScene.tsx` with seven distinct 3D chapter forms: sculptural orbital intro, floating skill nodes, experience timeline, project showcase panels, connected AI network, open-book education motif, and animated contact rings.
+- Scroll position is measured against the actual section offsets. Each chapter scales and rotates in/out as its corresponding section becomes active, with continuous interpolation between sections. The 3D Canvas is no longer an office background.
 - Layered the decorative canvas behind the readable HTML content. Reduced-motion users receive the static HTML experience without the 3D canvas.
 - **Verification:** GitHub Actions production build passed for commit `f0b23a7f74899e34d04033e019854874f0949e67` (run `37974270738`). The initial build failed on React Three Fiber JSX intrinsic-element typing; adding `src/three-types.d.ts` fixed the issue.
-- **Code-level review:** section order remains Intro → Skills → Experience → Projects → AI → Education → Contact, with scroll progress interpolating across all seven camera stations. The scene asset is loaded from a third-party CDN and requires network access. This does not replace a visual browser review.
+- **Code-level review:** the chapter array matches Intro → Skills → Experience → Projects → AI → Education → Contact and uses section offsets to interpolate the scene transitions. This does not replace a visual browser review.
 - **Still unverified:** browser rendering, camera framing/alignment at each section, mobile visual quality, WebGL failure handling, keyboard interaction in context, and real-device performance. This is a greybox, not the final art pass.
 
 ## Files added or modified
@@ -76,7 +77,7 @@ Removed: none.
 | Stage 1 dependency installation and production build | Pass |
 | Stage 2 dependency installation and production build | Pass |
 | Earlier Stage 3 dependency installation and production build | Pass — run [37974270738](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37974270738) |
-| Latest immersive redesign production build | Pending — run [37978466718](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37978466718) |
+| Latest seven-chapter 3D production build | Pending — run [37978978359](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37978978359) |
 | Manual browser and camera-route review | Not performed |
 | Keyboard, reduced-motion, mobile and no-WebGL manual checks | Not performed |
 | Performance profiling on real devices | Not performed |
@@ -97,7 +98,7 @@ Do not claim the greybox is complete until the latest build passes and the room/
 ## Pending work
 
 - Confirm latest GitHub Actions build passes.
-- Owner to visually review the redesigned scene and camera framing at all seven sections in a browser; automated build success does not establish visual correctness.
+- Owner to visually review all seven scroll-driven chapter scenes and transitions in a browser; automated build success does not establish visual correctness.
 - Fix any route/framing issues found in visual review.
 - Complete the Stage 3 review gate before Stage 4 HTML interface/art work.
 
@@ -117,4 +118,4 @@ Design:
 
 ## Exact next task
 
-**Wait for the latest redesign build, then have the owner refresh the local site and review all seven sections. Do not mark the visual gate passed until the owner confirms the scene looks right.** The current production build already passes. Fix any visual issues found and update this status file with results that were actually verified. Do not proceed to the Warm Studio art pass until Stage 3 has passed visual review.
+**Wait for the seven-chapter scene build, then have the owner refresh the local site and review the scroll-driven 3D transitions at every section. Do not mark the visual gate passed until the owner confirms the result.** The current production build already passes. Fix any visual issues found and update this status file with results that were actually verified. Do not proceed to the Warm Studio art pass until Stage 3 has passed visual review.
