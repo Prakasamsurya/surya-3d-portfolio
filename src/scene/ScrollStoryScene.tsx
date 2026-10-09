@@ -7,76 +7,119 @@ const SECTION_IDS = ["intro", "skills", "experience", "projects", "ai", "educati
 function IntroForm() {
   return (
     <group>
-      <mesh>
-        <torusKnotGeometry args={[1.05, 0.24, 180, 24, 2, 5]} />
-        <meshPhysicalMaterial color="#4DC9C0" metalness={0.68} roughness={0.19} clearcoat={1} />
+      <mesh rotation={[0.08, -0.22, -0.08]}>
+        <torusKnotGeometry args={[0.82, 0.12, 160, 20, 2, 3]} />
+        <meshPhysicalMaterial color={TEAL} metalness={0.52} roughness={0.24} clearcoat={0.7} />
       </mesh>
-      <mesh rotation={[0.8, 0.4, 0]}>
-        <torusGeometry args={[1.7, 0.025, 12, 160]} />
-        <meshStandardMaterial color="#FFB46B" metalness={0.7} emissive="#9D5428" emissiveIntensity={0.4} />
+      <mesh rotation={[0.35, 0.2, 0.1]}>
+        <torusGeometry args={[1.42, 0.014, 8, 128]} />
+        <meshStandardMaterial color={AMBER} metalness={0.55} roughness={0.32} />
       </mesh>
-      <mesh rotation={[1.3, -0.5, 0]}>
-        <torusGeometry args={[2.05, 0.012, 8, 160]} />
-        <meshStandardMaterial color="#F8E8CF" metalness={0.55} />
-      </mesh>
-      <mesh position={[0, 0, -0.65]}>
-        <icosahedronGeometry args={[0.62, 2]} />
-        <meshPhysicalMaterial color="#F5E8D5" roughness={0.12} metalness={0.2} transmission={0.28} thickness={1.2} />
-      </mesh>
+      <Label position={[0, -1.65, 0]} fontSize={0.25}>SURYA PRAKASAM</Label>
+      <Label position={[0, -1.94, 0]} color={TEAL} fontSize={0.12}>DEVELOPER  /  AI</Label>
     </group>
   );
 }
 
 function SkillsForm() {
-  const colors = ["#48C7BE", "#F3AE65", "#A8A4FF", "#F1E7D7", "#6F9FFF", "#FF7F91"];
+  const items = [
+    { name: "PYTHON", color: TEAL, p: [-1.15, 0.78, 0] as [number, number, number] },
+    { name: "REACT", color: "#75BFFF", p: [0.05, 0.78, 0.08] as [number, number, number] },
+    { name: "GEN AI", color: AMBER, p: [1.25, 0.78, -0.02] as [number, number, number] },
+    { name: "DATA", color: "#C1B5FF", p: [-0.55, -0.35, 0.08] as [number, number, number] },
+    { name: "AUTOMATION", color: CREAM, p: [0.8, -0.35, 0] as [number, number, number] },
+  ];
   return (
     <group>
-      <mesh rotation={[0.35, 0.2, 0.1]}>
-        <icosahedronGeometry args={[0.8, 1]} />
-        <meshPhysicalMaterial color="#25292C" metalness={0.8} roughness={0.2} clearcoat={1} />
+      <mesh position={[0, 0.1, -0.3]} rotation={[0.1, 0.18, 0]}>
+        <boxGeometry args={[3.8, 2.8, 0.08]} />
+        <meshStandardMaterial color="#202B2E" metalness={0.18} roughness={0.7} />
       </mesh>
-      {colors.map((color, i) => {
-        const angle = (i / colors.length) * Math.PI * 2;
-        return (
-          <group key={color} position={[Math.cos(angle) * 1.8, Math.sin(angle) * 1.1, Math.sin(angle * 2) * 0.5]}>
-            <mesh>
-              <sphereGeometry args={[0.26 + (i % 2) * 0.08, 32, 32]} />
-              <meshPhysicalMaterial color={color} metalness={0.35} roughness={0.2} clearcoat={1} />
-            </mesh>
-            <mesh rotation={[Math.PI / 2, 0, angle]}>
-              <torusGeometry args={[0.39, 0.012, 8, 48]} />
-              <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} />
-            </mesh>
-          </group>
-        );
-      })}
-      <mesh rotation={[0.5, 0.4, 0]}>
-        <torusGeometry args={[2.55, 0.018, 8, 120]} />
-        <meshStandardMaterial color="#F3AE65" />
-      </mesh>
+      {items.map((item, i) => (
+        <group key={item.name} position={item.p}>
+          <mesh>
+            <boxGeometry args={[i === 4 ? 1.55 : 1.12, 0.62, 0.12]} />
+            <meshPhysicalMaterial color="#253235" metalness={0.25} roughness={0.34} clearcoat={0.35} />
+          </mesh>
+          <mesh position={[0, 0.22, 0.067]}>
+            <boxGeometry args={[0.72, 0.035, 0.012]} />
+            <meshBasicMaterial color={item.color} />
+          </mesh>
+          <Label position={[0, -0.08, 0.075]} color={item.color} fontSize={i === 4 ? 0.105 : 0.13}>{item.name}</Label>
+        </group>
+      ))}
+      <Label position={[0, 1.2, 0.02]} color={CREAM} fontSize={0.14}>TOOLS I BUILD WITH</Label>
     </group>
   );
 }
 
 function ExperienceForm() {
+  const milestones = [
+    { x: -1.65, label: "DESIGN", color: CREAM },
+    { x: -0.55, label: "BUILD", color: TEAL },
+    { x: 0.55, label: "AI", color: AMBER },
+    { x: 1.65, label: "LEARN", color: "#BEB7FF" },
+  ];
   return (
     <group>
-      {[0, 1, 2, 3, 4].map((i) => (
-        <group key={i} position={[-1.8 + i * 0.9, Math.sin(i * 0.9) * 0.28, 0]}>
-          <mesh position={[0, -0.15, 0]}>
-            <cylinderGeometry args={[0.16, 0.22, 0.34 + i * 0.18, 48]} />
-            <meshStandardMaterial color={i === 4 ? "#FFB46B" : "#2F7F86"} metalness={0.48} roughness={0.25} />
+      <mesh position={[0, 0, -0.2]}>
+        <boxGeometry args={[4.1, 0.045, 0.045]} />
+        <meshStandardMaterial color="#526264" metalness={0.4} />
+      </mesh>
+      {milestones.map((item, i) => (
+        <group key={item.label} position={[item.x, 0, 0]}>
+          <mesh>
+            <cylinderGeometry args={[0.18, 0.18, 0.14, 32]} />
+            <meshPhysicalMaterial color={item.color} metalness={0.32} roughness={0.25} emissive={item.color} emissiveIntensity={0.08} />
           </mesh>
-          <mesh position={[0, 0.28 + i * 0.09, 0]}>
-            <sphereGeometry args={[0.12, 24, 24]} />
-            <meshStandardMaterial color="#F5E8D5" emissive="#F5E8D5" emissiveIntensity={0.22} />
+          <mesh position={[0, -0.48, 0]}>
+            <boxGeometry args={[0.025, 0.8, 0.025]} />
+            <meshStandardMaterial color="#526264" />
+          </mesh>
+          <mesh position={[0, -0.95, 0]}>
+            <boxGeometry args={[0.68, 0.24, 0.08]} />
+            <meshStandardMaterial color="#243235" />
+          </mesh>
+          <Label position={[0, -0.95, 0.06]} color={item.color} fontSize={0.105}>{item.label}</Label>
+          <mesh position={[0, 0.3 + i * 0.04, -0.12]}>
+            <sphereGeometry args={[0.055, 16, 16]} />
+            <meshBasicMaterial color={item.color} />
           </mesh>
         </group>
       ))}
-      <mesh rotation={[0, 0, Math.PI / 2]} position={[0, 0.1, -0.25]}>
-        <torusGeometry args={[2.2, 0.035, 10, 120, Math.PI]} />
-        <meshStandardMaterial color="#E4B780" metalness={0.6} />
+      <Label position={[0, 1.15, 0]} fontSize={0.16}>WORK  /  CONTRIBUTIONS  /  GROWTH</Label>
+    </group>
+  );
+}
+
+function ProjectCard({ title, accent, position, rotation = 0 }: {
+  title: string; accent: string; position: [number, number, number]; rotation?: number;
+}) {
+  return (
+    <group position={position} rotation={[0, rotation, 0]}>
+      <mesh>
+        <boxGeometry args={[1.5, 1.95, 0.13]} />
+        <meshPhysicalMaterial color="#263437" metalness={0.28} roughness={0.34} clearcoat={0.45} />
       </mesh>
+      <mesh position={[0, 0.12, 0.074]}>
+        <planeGeometry args={[1.28, 1.48]} />
+        <meshBasicMaterial color="#11191B" />
+      </mesh>
+      <mesh position={[0, 0.75, 0.09]}>
+        <boxGeometry args={[1.28, 0.22, 0.025]} />
+        <meshBasicMaterial color={accent} />
+      </mesh>
+      {[0, 1, 2].map((line) => (
+        <mesh key={line} position={[-0.08, 0.42 - line * 0.19, 0.095]}>
+          <boxGeometry args={[0.82 - line * 0.12, 0.035, 0.018]} />
+          <meshBasicMaterial color={line === 0 ? accent : "#82918F"} />
+        </mesh>
+      ))}
+      <mesh position={[0, -0.32, 0.1]}>
+        <boxGeometry args={[0.78, 0.34, 0.018]} />
+        <meshBasicMaterial color={accent} />
+      </mesh>
+      <Label position={[0, -0.72, 0.105]} fontSize={0.105}>{title}</Label>
     </group>
   );
 }
@@ -84,36 +127,18 @@ function ExperienceForm() {
 function ProjectsForm() {
   return (
     <group>
-      {[
-        { p: [-1.15, 0.45, 0.25] as [number, number, number], r: [0.12, -0.24, 0.1] as [number, number, number], c: "#2F7F86" },
-        { p: [0.25, 0.15, -0.15] as [number, number, number], r: [-0.18, 0.32, -0.08] as [number, number, number], c: "#F4B56D" },
-        { p: [1.25, -0.35, 0.25] as [number, number, number], r: [0.2, 0.1, 0.22] as [number, number, number], c: "#8E91FF" },
-      ].map((item) => (
-        <group key={item.c} position={item.p} rotation={item.r}>
-          <mesh>
-            <boxGeometry args={[1.55, 1.95, 0.12]} />
-            <meshPhysicalMaterial color="#20272B" metalness={0.5} roughness={0.24} clearcoat={0.8} />
-          </mesh>
-          <mesh position={[0, 0.18, 0.075]}>
-            <planeGeometry args={[1.3, 1.2]} />
-            <meshStandardMaterial color={item.c} emissive={item.c} emissiveIntensity={0.35} />
-          </mesh>
-          {[0, 1, 2].map((line) => (
-            <mesh key={line} position={[-0.12, -0.55 - line * 0.18, 0.08]}>
-              <boxGeometry args={[0.88 - line * 0.14, 0.035, 0.018]} />
-              <meshStandardMaterial color="#F5E8D5" />
-            </mesh>
-          ))}
-        </group>
-      ))}
+      <ProjectCard title="AI INTERVIEWER" accent={TEAL} position={[-1.42, 0.05, 0.1]} rotation={0.16} />
+      <ProjectCard title="AI CHATBOT" accent={AMBER} position={[0, 0.2, 0.28]} rotation={-0.04} />
+      <ProjectCard title="DATA / BI" accent="#BEB7FF" position={[1.42, -0.02, -0.1]} rotation={-0.16} />
+      <Label position={[0, 1.55, 0]} fontSize={0.16}>SELECTED BUILDS & EXPERIMENTS</Label>
     </group>
   );
 }
 
 function AIForm() {
   const nodes = [
-    [-1.5, 0.8, 0.1], [-0.4, 1.35, -0.3], [0.85, 1.0, 0.1], [1.55, 0.1, -0.2],
-    [0.65, -0.9, 0.2], [-0.7, -1.1, -0.2], [-1.6, -0.25, 0.15], [0, 0.1, 0.5],
+    [-1.35, 0.65, 0], [-0.45, 1.05, 0.1], [0.55, 0.78, -0.1], [1.35, 0.12, 0],
+    [0.65, -0.72, 0.1], [-0.45, -0.88, 0], [-1.3, -0.2, -0.1], [0, 0.05, 0.35],
   ] as const;
   const links = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0],[0,7],[1,7],[2,7],[4,7],[5,7]] as const;
   return (
@@ -131,10 +156,11 @@ function AIForm() {
       })}
       {nodes.map((p, i) => (
         <mesh key={i} position={p}>
-          <icosahedronGeometry args={[i === 7 ? 0.36 : 0.2, 2]} />
-          <meshPhysicalMaterial color={i === 7 ? "#FFB46B" : "#66D6CF"} metalness={0.45} roughness={0.16} emissive={i === 7 ? "#9D5428" : "#125D60"} emissiveIntensity={0.7} />
+          <icosahedronGeometry args={[i === 7 ? 0.28 : 0.16, 1]} />
+          <meshPhysicalMaterial color={i === 7 ? AMBER : TEAL} metalness={0.2} roughness={0.28} emissive={i === 7 ? "#75421F" : "#145552"} emissiveIntensity={0.4} />
         </mesh>
       ))}
+      <Label position={[0, -1.38, 0]} fontSize={0.16}>MODELS  →  CONTEXT  →  OUTPUT</Label>
     </group>
   );
 }
@@ -142,24 +168,31 @@ function AIForm() {
 function EducationForm() {
   return (
     <group>
-      <mesh position={[-0.05, 0, 0]} rotation={[0, 0, -0.12]}>
-        <boxGeometry args={[1.7, 2.2, 0.22]} />
-        <meshStandardMaterial color="#F5E8D5" roughness={0.32} />
+      <mesh position={[-0.02, -0.05, 0]} rotation={[0, 0, -0.08]}>
+        <boxGeometry args={[1.35, 1.8, 0.14]} />
+        <meshStandardMaterial color="#E6DCC8" roughness={0.6} />
       </mesh>
-      <mesh position={[0.88, 0, 0.04]} rotation={[0, 0, 0.12]}>
-        <boxGeometry args={[1.7, 2.2, 0.22]} />
-        <meshStandardMaterial color="#2F7F86" roughness={0.28} />
+      <mesh position={[0.78, -0.05, 0.04]} rotation={[0, 0, 0.08]}>
+        <boxGeometry args={[1.35, 1.8, 0.14]} />
+        <meshStandardMaterial color="#2B7E7B" roughness={0.5} />
       </mesh>
       {[0, 1, 2, 3].map((i) => (
-        <mesh key={i} position={[0.1, 0.55 - i * 0.35, 0.14]}>
-          <boxGeometry args={[1.1, 0.035, 0.025]} />
-          <meshStandardMaterial color="#C08A55" />
+        <mesh key={i} position={[0.1, 0.45 - i * 0.27, 0.12]}>
+          <boxGeometry args={[0.78, 0.025, 0.02]} />
+          <meshStandardMaterial color="#9D784B" />
         </mesh>
       ))}
-      <mesh position={[0, 1.55, -0.25]} rotation={[0.2, 0.2, 0.4]}>
-        <torusGeometry args={[0.7, 0.08, 16, 80]} />
-        <meshPhysicalMaterial color="#E5B56D" metalness={0.8} roughness={0.17} />
-      </mesh>
+      <group position={[0.3, 1.28, 0.05]} rotation={[0.12, 0.18, 0.1]}>
+        <mesh rotation={[0, 0, Math.PI / 4]}>
+          <boxGeometry args={[0.72, 0.72, 0.08]} />
+          <meshPhysicalMaterial color={AMBER} metalness={0.25} roughness={0.3} />
+        </mesh>
+        <mesh position={[0, -0.36, 0]}>
+          <cylinderGeometry args={[0.025, 0.025, 0.65, 12]} />
+          <meshStandardMaterial color={AMBER} />
+        </mesh>
+      </group>
+      <Label position={[0.35, -1.35, 0.1]} fontSize={0.16}>LEARNING  /  PRACTICE</Label>
     </group>
   );
 }
@@ -167,16 +200,24 @@ function EducationForm() {
 function ContactForm() {
   return (
     <group>
-      {[0, 1, 2].map((i) => (
-        <mesh key={i} rotation={[0.5 + i * 0.45, 0.2 + i * 0.3, i * 0.35]}>
-          <torusGeometry args={[1.05 + i * 0.38, 0.055, 16, 120]} />
-          <meshPhysicalMaterial color={i === 1 ? "#FFB46B" : "#4DC9C0"} metalness={0.75} roughness={0.16} clearcoat={1} />
-        </mesh>
-      ))}
       <mesh>
-        <sphereGeometry args={[0.55, 64, 64]} />
-        <meshPhysicalMaterial color="#F5E8D5" roughness={0.08} metalness={0.25} transmission={0.3} thickness={1.5} />
+        <boxGeometry args={[2.8, 1.8, 0.18]} />
+        <meshPhysicalMaterial color="#263638" metalness={0.18} roughness={0.32} clearcoat={0.4} />
       </mesh>
+      <mesh position={[0, 0, 0.105]}>
+        <planeGeometry args={[2.48, 1.48]} />
+        <meshBasicMaterial color="#142022" />
+      </mesh>
+      <mesh position={[0, 0.04, 0.14]} rotation={[0, 0, 0.42]}>
+        <boxGeometry args={[1.2, 0.045, 0.02]} />
+        <meshBasicMaterial color={TEAL} />
+      </mesh>
+      <mesh position={[0, 0.04, 0.14]} rotation={[0, 0, -0.42]}>
+        <boxGeometry args={[1.2, 0.045, 0.02]} />
+        <meshBasicMaterial color={TEAL} />
+      </mesh>
+      <Label position={[0, -0.04, 0.16]} fontSize={0.28}>HELLO</Label>
+      <Label position={[0, -0.38, 0.16]} color={AMBER} fontSize={0.12}>LET'S BUILD SOMETHING</Label>
     </group>
   );
 }
@@ -263,10 +304,6 @@ export default function ScrollStoryScene() {
           <Form />
         </group>
       ))}
-      <mesh position={[0, -2.05, -0.3]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[3.6, 96]} />
-        <meshStandardMaterial color="#2F7F86" transparent opacity={0.1} roughness={0.8} />
-      </mesh>
     </group>
   );
 }
