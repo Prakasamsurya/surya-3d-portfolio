@@ -4,7 +4,7 @@ Read this file before starting any task. If it disagrees with the repository, ve
 
 ## Current stage
 
-**Stage 3 — cinematic seven-chapter 3D implementation in progress; visual review pending.** Each section (Intro, Skills, Experience, Projects, AI, Education and Contact) has a distinct procedural 3D form. Scroll progress drives chapter visibility, rotation and camera choreography. HTML chapter panels animate into view, the navigation highlights the active section, and mobile-specific scene framing and horizontally scrollable navigation have been added. Recent CI builds passed through the chapter/navigation work; the latest responsive commits are running or awaiting CI. Browser rendering, visual quality and performance still require review.
+**Stage 3 — content-led 3D redesign in progress; visual review pending.** After the owner rejected the abstract shapes as irrelevant and generic, the scene was reworked around the portfolio: labelled skill/tool panels, a work-area timeline, illuminated project preview cards, an AI workflow network, a learning/book motif, and a contact panel. Desktop chapters alternate the text panel and 3D scene side; the scene moves with the active chapter. The decorative ground platform was removed, scene lighting improved, and template placeholder copy replaced with grounded portfolio details. Browser rendering, typography readability, mobile framing and performance still require review.
 
 ## Repository and branch
 
@@ -34,9 +34,9 @@ Read this file before starting any task. If it disagrees with the repository, ve
 - Initial greybox used repeated procedural workstations; the owner rejected the result as visually unconvincing.
 - Researched scroll-driven WebGL portfolio principles: the 3D environment should be the experience, with purposeful camera motion, depth, lighting, and HTML content that remains readable. References: https://webflow.com/blog/3d-design-website and https://www.webgpu.com/showcase/joseph-santamaria-3d-webgl-portfolio/.
 - A first redesign replaced the workstation model with the CC0 Downtown Office Interiors GLB, but the owner clarified that this still missed the core requirement: every section must have its own 3D scene choreography.
-- Added `ScrollStoryScene.tsx` with seven distinct 3D chapter forms: sculptural orbital intro, floating skill nodes, experience timeline, project showcase panels, connected AI network, open-book education motif, and animated contact rings.
+- Added `ScrollStoryScene.tsx` with seven chapter-specific 3D compositions. After the owner rejected abstract forms as generic, revised the visuals to use meaningful labels and forms tied to tools, work areas, project previews, AI workflow, learning, and contact.
 - Scroll position is measured against the actual section offsets. Each chapter scales and rotates in/out as its corresponding section becomes active, with continuous interpolation between sections. The 3D Canvas is no longer an office background.
-- Layered the decorative canvas behind the readable HTML content. Reduced-motion users receive the static HTML experience without the 3D canvas.
+- Layered the 3D canvas behind readable HTML content, removed the generic floor platform, alternated desktop content-panel placement with the 3D scene, improved lighting, and added mobile framing. Reduced-motion users receive the HTML experience without the 3D canvas.
 - **Verification:** GitHub Actions production build passed for commit `f0b23a7f74899e34d04033e019854874f0949e67` (run `37974270738`). The initial build failed on React Three Fiber JSX intrinsic-element typing; adding `src/three-types.d.ts` fixed the issue.
 - **Code-level review:** the chapter array matches Intro → Skills → Experience → Projects → AI → Education → Contact and uses section offsets to interpolate the scene transitions. This does not replace a visual browser review.
 - **Still unverified:** browser rendering, camera framing/alignment at each section, mobile visual quality, WebGL failure handling, keyboard interaction in context, and real-device performance. This is a greybox, not the final art pass.
@@ -79,7 +79,8 @@ Removed: none.
 | Earlier Stage 3 dependency installation and production build | Pass — run [37974270738](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37974270738) |
 | Seven-chapter 3D, chapter reveals, active navigation and README checks | Pass — latest completed run [37979731940](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37979731940) |
 | Responsive mobile navigation and chapter spacing | In progress — run [37979910529](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37979910529) |
-| Mobile-specific 3D scene framing | Commit pushed; CI run to be confirmed |
+| Content-led chapter redesign, real portfolio copy and scene lighting | Pass — runs [37980526609](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37980526609), [37980587336](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37980587336), [37980599890](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37980599890) |
+| Alternating panel/scene choreography and final labels | In progress — runs [37980643201](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37980643201), [37980650172](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37980650172), [37980664646](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37980664646) |
 | Manual browser and camera-route review | Not performed |
 | Keyboard, reduced-motion, mobile and no-WebGL manual checks | Not performed |
 | Performance profiling on real devices | Not performed |
@@ -89,7 +90,7 @@ Do not claim the greybox is complete until the latest build passes and the room/
 ## Approved decisions
 
 - Design direction: cinematic, dark, scroll-driven 3D chapters after owner rejected the first static-looking visual pass (2026-10-10).
-- Palette: dark cinematic base `#101619`, panels `#182124`, text `#F5F2EA`, teal accent `#4DC9C0`, warm light `#FFB46B`. Derived accessibility colors allowed if documented.
+- Palette: dark cinematic base `#101619`, panels `#182124`, text `#F5F2EA`, teal accent `#4DC9C0`, warm light `#FFB46B`. Use accents to support actual content, not as random decorative color.
 - Fixed section order: Intro, Skills, Experience, Projects, AI, Education, Contact.
 - Seven distinct chapter-specific 3D compositions with scroll-linked camera and form transitions; no shared office backdrop.
 - All portfolio content remains readable HTML, not text embedded in 3D objects.
@@ -100,7 +101,7 @@ Do not claim the greybox is complete until the latest build passes and the room/
 ## Pending work
 
 - Confirm latest GitHub Actions build passes.
-- Owner to visually review all seven scroll-driven chapter scenes and transitions in a browser; automated build success does not establish visual correctness.
+- Browser visual review of all seven content-led chapter scenes and transitions remains outstanding; automated build success does not establish visual correctness.
 - Fix any route/framing issues found in visual review.
 - Complete the Stage 3 review gate before Stage 4 HTML interface/art work.
 
@@ -120,4 +121,4 @@ Design:
 
 ## Exact next task
 
-**Continue responsive and interaction polish, confirm CI for the mobile layout and mobile 3D framing commits, and keep visual review explicitly pending.** Automated build success does not establish visual correctness; no browser visual review has been performed. Do not claim the visual gate passed without an actual browser review.
+**Confirm CI for the alternating scene choreography and updated experience labels, then continue refining only against actual browser evidence.** Automated build success does not establish visual correctness; no browser visual review has been performed. Do not claim the visual gate passed without an actual browser review.
