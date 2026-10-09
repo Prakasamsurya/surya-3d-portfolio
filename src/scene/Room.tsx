@@ -78,9 +78,8 @@ function KeyboardAndMouse() {
           </mesh>
         )),
       )}
-      <mesh position={[0.68, 1.28, 0.34]} rotation={[0, 0, -0.08]} castShadow>
+      <mesh position={[0.68, 1.28, 0.34]} rotation={[0, 0, -0.08]} scale={[0.105, 0.045, 0.16]} castShadow>
         <sphereGeometry args={[1, 16, 12]} />
-        <scale value={[0.105, 0.045, 0.16]} />
         <meshStandardMaterial color="#777B7E" roughness={0.42} />
       </mesh>
     </group>
