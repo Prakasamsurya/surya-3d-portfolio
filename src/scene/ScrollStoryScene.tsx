@@ -184,9 +184,22 @@ function ContactForm() {
 const forms = [IntroForm, SkillsForm, ExperienceForm, ProjectsForm, AIForm, EducationForm, ContactForm];
 
 export default function ScrollStoryScene() {
+  const rootGroup = useRef<Group | null>(null);
   const groups = useRef<Array<Group | null>>([]);
   const scrollY = useRef(0);
   const offsets = useRef<number[]>([]);
+
+  useEffect(() => {
+    const positionScene = () => {
+      if (!rootGroup.current) return;
+      const mobile = window.innerWidth <= 760;
+      rootGroup.current.position.set(mobile ? 1.55 : 1.25, mobile ? -0.42 : 0.15, 0);
+      rootGroup.current.scale.setScalar(mobile ? 0.82 : 1);
+    };
+    positionScene();
+    window.addEventListener("resize", positionScene);
+    return () => window.removeEventListener("resize", positionScene);
+  }, []);
 
   useEffect(() => {
     const measure = () => {
@@ -239,7 +252,7 @@ export default function ScrollStoryScene() {
   });
 
   return (
-    <group position={[1.25, 0.15, 0]}>
+    <group ref={rootGroup} position={[1.25, 0.15, 0]}>
       {forms.map((Form, index) => (
         <group
           key={SECTION_IDS[index]}
