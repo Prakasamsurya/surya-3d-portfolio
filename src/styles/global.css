@@ -143,8 +143,9 @@ a:focus-visible, button:focus-visible { outline: 3px solid #4DC9C0; outline-offs
   background: #182124; color: #F5F2EA; font-size: .9rem;
 }
 @media (min-width: 1100px) {
-  .portfolio-section:nth-child(even) .section-content { margin-left: 0; margin-right: auto; }
+  .portfolio-section:nth-child(even) .section-content { margin-left: auto; margin-right: 0; }
   .portfolio-section:nth-child(even) .section-content::after { right: 1.6rem; left: auto; }
+  .portfolio-section:nth-child(odd) .section-content { margin-left: 0; margin-right: auto; }
 }
 @media (max-width: 900px) {
   .section-content { width: min(58%, 570px); }
