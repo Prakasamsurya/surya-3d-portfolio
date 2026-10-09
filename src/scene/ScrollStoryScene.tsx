@@ -66,10 +66,10 @@ function SkillsForm() {
 
 function ExperienceForm() {
   const milestones = [
-    { x: -1.65, label: "DESIGN", color: CREAM },
-    { x: -0.55, label: "BUILD", color: TEAL },
-    { x: 0.55, label: "AI", color: AMBER },
-    { x: 1.65, label: "LEARN", color: "#BEB7FF" },
+    { x: -1.65, label: "UI/UX", color: CREAM },
+    { x: -0.55, label: "FULL STACK", color: TEAL },
+    { x: 0.55, label: "GEN AI", color: AMBER },
+    { x: 1.65, label: "PROJECTS", color: "#BEB7FF" },
   ];
   return (
     <group>
@@ -98,7 +98,7 @@ function ExperienceForm() {
           </mesh>
         </group>
       ))}
-      <Label position={[0, 1.15, 0]} fontSize={0.16}>WORK  /  CONTRIBUTIONS  /  GROWTH</Label>
+      <Label position={[0, 1.15, 0]} fontSize={0.16}>DESIGN  /  DEVELOPMENT  /  APPLIED AI</Label>
     </group>
   );
 }
