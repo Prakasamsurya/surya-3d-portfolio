@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import type { CSSProperties } from "react";
 import type { PortfolioSectionContent } from "../../content/portfolio";
 import SectionHeading from "./SectionHeading";
 
@@ -49,7 +50,7 @@ export default function SectionContent({ content, className = "" }: Props) {
         <SectionHeading
           eyebrow=""
           title={content.title}
-          number={content.number}
+          number=""
         />
         <p className="section-intro">{content.intro}</p>
         <dl className="fact-list">
@@ -57,7 +58,7 @@ export default function SectionContent({ content, className = "" }: Props) {
             <div
               className="fact-row"
               key={`${fact.label}-${fact.value}`}
-              style={{ "--fact-index": index } as React.CSSProperties}
+              style={{ "--fact-index": index } as CSSProperties}
             >
               <dt>{fact.label}</dt>
               <dd>
