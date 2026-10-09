@@ -4,35 +4,40 @@ Read this file before starting any task. If it disagrees with the repository, ve
 
 ## Current stage
 
-**Stage 2 — Content layer (in progress).** The typed content data and section integration have been committed. GitHub Actions verification for the current Stage 2 commits is pending. Stage 3 (3D greybox) has not started.
+**Stage 3 — 3D greybox (in progress).** Stage 1 foundation and Stage 2 typed content are committed. Their GitHub Actions production builds passed. The first connected-room greybox, seven desk stations, fixed 3D canvas, and scroll-driven camera are now committed; the current Stage 3 build check must pass before this stage is reviewed as complete.
 
 ## Repository and branch
 
 - Repository: `Prakasamsurya/surya-3d-portfolio` (https://github.com/Prakasamsurya/surya-3d-portfolio)
 - Branch: `main`
 - Documentation initialization commit: `10e977d5ef418d792ee258fb1ce9ff825a5caa1a`
-- Stage 1 and Stage 2 changes were committed directly to `main` through the GitHub integration in sequential file commits.
+- Work has been committed directly to `main` through the GitHub integration in sequential file commits.
 
 ## Completed work
 
 ### Stage 1 — Application foundation
-- Added Vite + React + TypeScript configuration.
-- Added an accessible site shell with skip link, navigation and footer.
-- Added the seven section shells in the required order.
-- Added responsive Warm Studio CSS.
-- Added GitHub Actions workflow for dependency installation and production build.
-- Fixed the missing Vite client type declaration.
-- **Verification:** GitHub Actions succeeded for the scaffold/type fix at commit `ffbc9ed574a474742c79f99e4a8099c9c1a1d856`; the following status update commit also passed. Later commits introduce Stage 2 changes and require their own CI verification.
+- Added Vite + React + TypeScript configuration, site shell, navigation, footer, and seven ordered section shells.
+- Added responsive Warm Studio styling and GitHub Actions build workflow.
+- Added Vite client type declaration after the first build revealed a missing stylesheet type declaration.
+- **Verification:** GitHub Actions install and production build passed for the scaffold/type-fix commit and subsequent status update.
 
-### Stage 2 — Content layer (in progress)
-- Added `src/content/portfolio.ts` with typed section content and explicit statuses: verified, placeholder, and pending verification.
-- Added reusable `SectionContent` component and connected all seven sections to the shared typed content source.
-- Used only approved facts from CONTENT.md. Unknown details remain visible placeholders; no project details, dates, links, or contact data were invented.
-- Added styling for fact rows and visibly marked placeholders.
+### Stage 2 — Content layer
+- Added `src/content/portfolio.ts` with typed section content and explicit content statuses.
+- Added a reusable content renderer and connected all seven sections to the shared content source.
+- Kept unconfirmed details visibly marked; did not invent personal facts, project claims, links, dates, or contact information.
+- **Verification:** GitHub Actions install and production build passed for the content layer and its section integrations.
+
+### Stage 3 — 3D greybox (in progress)
+- Verified stable package compatibility before adding 3D dependencies: React Three Fiber v9 pairs with React 19; the stable v9.8.1 release includes React 19.3 compatibility. Drei v10.7.9, Three.js v0.186.1, and @types/three v0.186.0 are stable releases.
+- Added `@react-three/fiber`, `@react-three/drei`, `three`, and `@types/three`. Did not add GSAP: the current greybox uses one shared scroll-progress value and a small camera interpolation loop instead.
+- Added `src/scene/roomLayout.ts`, `Room.tsx`, `ScrollCamera.tsx`, and `PortfolioScene.tsx`.
+- Added one connected room with floor, walls, ceiling, seven repeated workstation blocks and a single camera that follows page scroll across the stations.
+- Layered the decorative canvas behind the readable HTML content. Reduced-motion users receive the static HTML experience without the 3D canvas.
+- **Not yet verified:** current Stage 3 production build, browser rendering, camera alignment across every section, mobile visual quality, WebGL failure handling, and performance. This is a greybox, not the final art pass.
 
 ## Files added or modified
 
-Stage 1 additions:
+Stage 1:
 - `.gitignore`, `package.json`, `index.html`, `vite.config.ts`
 - `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`
 - `src/main.tsx`, `src/App.tsx`
@@ -40,18 +45,21 @@ Stage 1 additions:
 - `src/components/ui/SectionHeading.tsx`
 - `src/sections/Intro.tsx`, `Skills.tsx`, `Experience.tsx`, `Projects.tsx`, `AI.tsx`, `Education.tsx`, `Contact.tsx`
 - `src/styles/global.css`
-- `.github/workflows/ci.yml`
-- `src/vite-env.d.ts`
+- `.github/workflows/ci.yml`, `src/vite-env.d.ts`
 
-Stage 2 additions:
+Stage 2:
 - `src/content/portfolio.ts`
 - `src/components/ui/SectionContent.tsx`
+- Modified all seven section files and `src/styles/global.css`
 
-Stage 2 modifications:
-- All seven section files now render from the typed content source.
-- `src/styles/global.css` now styles typed facts and visible placeholders.
-- `README.md` and `ARCHITECTURE.md` reflect the implementation progress.
-- This status file.
+Stage 3:
+- `src/scene/roomLayout.ts`
+- `src/scene/Room.tsx`
+- `src/scene/ScrollCamera.tsx`
+- `src/scene/PortfolioScene.tsx`
+- Modified `package.json`, `src/components/layout/SiteShell.tsx`, and `src/styles/global.css`
+
+Documentation modified: `README.md`, `ARCHITECTURE.md`, `IMPLEMENTATION_STATUS.md`.
 
 Removed: none.
 
@@ -59,14 +67,15 @@ Removed: none.
 
 | Check | Result |
 | --- | --- |
-| Repository and documentation inspected | Pass |
-| Stage 1 dependency installation and production build in GitHub Actions | Pass for the scaffold/type-fix commit |
-| Current Stage 2 type check and production build | Pending; check the latest GitHub Actions run |
-| Manual browser/visual review | Not performed |
-| Keyboard, reduced-motion and mobile accessibility review | Not performed |
-| 3D scene and WebGL fallback | Not started |
+| Repository and six documentation files inspected | Pass |
+| Stage 1 dependency installation and production build | Pass |
+| Stage 2 dependency installation and production build | Pass |
+| Current Stage 3 dependency installation and production build | Pending; check latest GitHub Actions run |
+| Manual browser and camera-route review | Not performed |
+| Keyboard, reduced-motion, mobile and no-WebGL manual checks | Not performed |
+| Performance profiling on real devices | Not performed |
 
-Do not mark Stage 2 complete until its latest CI run passes, placeholders are verified as visible, and the owner reviews the stage.
+Do not claim the greybox is complete until the latest build passes and the room/camera route has been reviewed.
 
 ## Approved decisions
 
@@ -74,34 +83,31 @@ Do not mark Stage 2 complete until its latest CI run passes, placeholders are ve
 - Palette: walls `#E9E4DA`, floor `#B58B5E`, workstation `#2B2D31`, accent `#2F7F86`, lamp light `#FFB46B`. Derived accessibility colors allowed if documented.
 - Fixed section order: Intro, Skills, Experience, Projects, AI, Education, Contact.
 - One connected room with distinct functional stations, driven by scrolling camera movement.
-- All portfolio content as readable HTML, not text in 3D objects.
-- Proposed stack direction: React, TypeScript, Vite, Three.js through React Three Fiber, Drei, and GSAP with ScrollTrigger if appropriate. Compatibility must be verified before adding 3D packages.
+- All portfolio content remains readable HTML, not text embedded in 3D objects.
+- Stack: React, TypeScript, Vite, Three.js through React Three Fiber and Drei. Current greybox uses native scroll progress for the camera; GSAP is not included unless a future tested need is recorded.
 - Approved factual content and six project categories as recorded in CONTENT.md.
 - Three-account sequential continuity protocol as recorded in WORKFLOW.md.
-- Stage 1 has no 3D implementation; Stage 2 separates typed content from presentation.
 
 ## Pending work
 
-- Verify latest GitHub Actions run for the Stage 2 commits and fix any build errors.
-- Review visible placeholders and section order.
-- Owner review at the Stage 2 gate.
-- Stage 3 greybox planning only after Stage 2 passes review.
+- Verify the current Stage 3 GitHub Actions build and fix any errors.
+- Review the camera route and alignment with all seven HTML sections.
+- Complete Stage 3 review gate before Stage 4 HTML interface/art work.
 
 ## Unresolved questions
 
-Content (all need owner confirmation; see CONTENT.md section 3):
+Content (see CONTENT.md):
 - Verified skills list and proficiency.
 - JAS WORLD internship dates, responsibilities, technologies, achievements and outcomes.
-- Exact names, functionality, implementation details, links and prototype-vs-finished status for projects.
-- Which AI tools are actually used and in what context.
-- Education: degree, dates, school details, certificates and verified links.
-- Contact: phone, email, GitHub, LinkedIn and whether to include Instagram, with real URLs/handles.
+- Exact project details, links and prototype-vs-finished status.
+- AI tools actually used and their contexts.
+- Education degree/dates/certificates and contact information.
 
-Design and architecture:
-- Station positions, camera coordinates, exact route and room layout (decided at the 3D greybox stage).
-- Whether GSAP and ScrollTrigger are the right fit for the camera system.
-- Typography, asset sourcing, file-size budgets and logo sources/licenses.
+Design:
+- Greybox station layout and route refinements after visual review.
+- Typography, asset sourcing, file-size budgets and technology-logo sources/licenses.
+- Robust WebGL fallback behavior and performance optimization in later stages.
 
 ## Exact next task
 
-**Check the latest GitHub Actions run for Stage 2.** If the build passes, perform a focused review of the typed data, section order and placeholder rendering, then stop for owner review. Do not start Stage 3 or add 3D dependencies until the Stage 2 review gate is approved.
+**Check the latest GitHub Actions run for Stage 3.** If it passes, review the greybox rendering and camera route. Fix any errors found and update this status file with verified results. Do not proceed to the Warm Studio art pass until Stage 3 has passed review.
