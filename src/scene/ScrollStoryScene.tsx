@@ -221,7 +221,7 @@ export default function ScrollStoryScene() {
       const distance = Math.abs(sectionProgress - index);
       const visibility = 1 - MathUtils.smoothstep(distance, 0.18, 0.95);
       const targetScale = 0.001 + visibility * (index === 0 ? 0.92 : 0.78);
-      group.scale.lerp({ x: targetScale, y: targetScale, z: targetScale } as import("three").Vector3, 1 - Math.exp(-delta * 5));
+      group.scale.setScalar(MathUtils.damp(group.scale.x, targetScale, 5, delta));
       group.rotation.y += delta * (0.12 + visibility * 0.22) * (index % 2 === 0 ? 1 : -1);
       group.rotation.x = MathUtils.damp(group.rotation.x, Math.sin(state.clock.elapsedTime * 0.45 + index) * 0.08, 2, delta);
       group.position.y = Math.sin(state.clock.elapsedTime * 0.7 + index * 1.4) * 0.13 + (1 - visibility) * -0.35;
