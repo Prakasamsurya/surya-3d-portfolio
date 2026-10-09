@@ -4,51 +4,54 @@ Read this file before starting any task. If it disagrees with the repository, ve
 
 ## Current stage
 
-**Stage 1 — Application foundation (in progress).** The initial React + TypeScript + Vite scaffold and seven ordered HTML section shells have been committed to `main`. The foundation has not yet been built or executed in a runtime, so Stage 1 is not complete. No 3D scene or 3D dependencies have been added.
+**Stage 2 — Content layer (in progress).** The typed content data and section integration have been committed. GitHub Actions verification for the current Stage 2 commits is pending. Stage 3 (3D greybox) has not started.
 
 ## Repository and branch
 
 - Repository: `Prakasamsurya/surya-3d-portfolio` (https://github.com/Prakasamsurya/surya-3d-portfolio)
 - Branch: `main`
 - Documentation initialization commit: `10e977d5ef418d792ee258fb1ce9ff825a5caa1a`
-- Stage 1 foundation files were committed directly to `main` through the GitHub integration in separate file commits.
+- Stage 1 and Stage 2 changes were committed directly to `main` through the GitHub integration in sequential file commits.
 
 ## Completed work
 
-- Preserved the six documentation files created in Stage 0.
-- Added Vite + React + TypeScript project configuration.
+### Stage 1 — Application foundation
+- Added Vite + React + TypeScript configuration.
 - Added an accessible site shell with skip link, navigation and footer.
-- Added section shells in the required order: Intro, Skills, Experience, Projects, AI, Education, Contact.
-- Added responsive Warm Studio CSS using the five approved palette colors.
-- Added a GitHub Actions workflow to run `npm install` and `npm run build` on pushes to `main` and pull requests.
-- Connected each section's accessible landmark label to its heading ID.
+- Added the seven section shells in the required order.
+- Added responsive Warm Studio CSS.
+- Added GitHub Actions workflow for dependency installation and production build.
+- Fixed the missing Vite client type declaration.
+- **Verification:** GitHub Actions succeeded for the scaffold/type fix at commit `ffbc9ed574a474742c79f99e4a8099c9c1a1d856`; the following status update commit also passed. Later commits introduce Stage 2 changes and require their own CI verification.
 
-## Files added or modified in Stage 1
+### Stage 2 — Content layer (in progress)
+- Added `src/content/portfolio.ts` with typed section content and explicit statuses: verified, placeholder, and pending verification.
+- Added reusable `SectionContent` component and connected all seven sections to the shared typed content source.
+- Used only approved facts from CONTENT.md. Unknown details remain visible placeholders; no project details, dates, links, or contact data were invented.
+- Added styling for fact rows and visibly marked placeholders.
 
-Added:
-- `.gitignore`
-- `package.json`
-- `index.html`
-- `vite.config.ts`
-- `tsconfig.json`
-- `tsconfig.app.json`
-- `tsconfig.node.json`
-- `src/main.tsx`
-- `src/App.tsx`
+## Files added or modified
+
+Stage 1 additions:
+- `.gitignore`, `package.json`, `index.html`, `vite.config.ts`
+- `tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`
+- `src/main.tsx`, `src/App.tsx`
 - `src/components/layout/SiteShell.tsx`
 - `src/components/ui/SectionHeading.tsx`
-- `src/sections/Intro.tsx`
-- `src/sections/Skills.tsx`
-- `src/sections/Experience.tsx`
-- `src/sections/Projects.tsx`
-- `src/sections/AI.tsx`
-- `src/sections/Education.tsx`
-- `src/sections/Contact.tsx`
+- `src/sections/Intro.tsx`, `Skills.tsx`, `Experience.tsx`, `Projects.tsx`, `AI.tsx`, `Education.tsx`, `Contact.tsx`
 - `src/styles/global.css`
 - `.github/workflows/ci.yml`
+- `src/vite-env.d.ts`
 
-Modified:
-- `IMPLEMENTATION_STATUS.md`
+Stage 2 additions:
+- `src/content/portfolio.ts`
+- `src/components/ui/SectionContent.tsx`
+
+Stage 2 modifications:
+- All seven section files now render from the typed content source.
+- `src/styles/global.css` now styles typed facts and visible placeholders.
+- `README.md` and `ARCHITECTURE.md` reflect the implementation progress.
+- This status file.
 
 Removed: none.
 
@@ -56,16 +59,14 @@ Removed: none.
 
 | Check | Result |
 | --- | --- |
-| Repository metadata and main branch inspected via GitHub integration | Pass |
-| Six documentation files read from main | Pass |
-| Scaffold and section files committed through GitHub contents API | Pass |
-| Local install, type check and production build | Not run in this environment |
-| GitHub Actions workflow | Added; execution result not yet verified |
-| Browser/visual review | Not run |
-| Accessibility and reduced-motion manual checks | Not run |
-| 3D scene, WebGL fallback and performance | Not started; later stages |
+| Repository and documentation inspected | Pass |
+| Stage 1 dependency installation and production build in GitHub Actions | Pass for the scaffold/type-fix commit |
+| Current Stage 2 type check and production build | Pending; check the latest GitHub Actions run |
+| Manual browser/visual review | Not performed |
+| Keyboard, reduced-motion and mobile accessibility review | Not performed |
+| 3D scene and WebGL fallback | Not started |
 
-Do not treat the scaffold as build-verified until the CI run is checked and any failures are fixed.
+Do not mark Stage 2 complete until its latest CI run passes, placeholders are verified as visible, and the owner reviews the stage.
 
 ## Approved decisions
 
@@ -77,29 +78,30 @@ Do not treat the scaffold as build-verified until the CI run is checked and any 
 - Proposed stack direction: React, TypeScript, Vite, Three.js through React Three Fiber, Drei, and GSAP with ScrollTrigger if appropriate. Compatibility must be verified before adding 3D packages.
 - Approved factual content and six project categories as recorded in CONTENT.md.
 - Three-account sequential continuity protocol as recorded in WORKFLOW.md.
-- Stage 1 deliberately contains no 3D implementation.
+- Stage 1 has no 3D implementation; Stage 2 separates typed content from presentation.
 
 ## Pending work
 
-- Verify the rerun after adding `src/vite-env.d.ts`. If it passes, perform the Stage 1 owner review; if it fails, inspect logs and fix the specific error before proceeding.
-- Owner review at the Stage 1 gate.
-- Stage 2 content data and placeholder conventions, only after Stage 1 passes review.
+- Verify latest GitHub Actions run for the Stage 2 commits and fix any build errors.
+- Review visible placeholders and section order.
+- Owner review at the Stage 2 gate.
+- Stage 3 greybox planning only after Stage 2 passes review.
 
 ## Unresolved questions
 
+Content (all need owner confirmation; see CONTENT.md section 3):
+- Verified skills list and proficiency.
+- JAS WORLD internship dates, responsibilities, technologies, achievements and outcomes.
+- Exact names, functionality, implementation details, links and prototype-vs-finished status for projects.
+- Which AI tools are actually used and in what context.
+- Education: degree, dates, school details, certificates and verified links.
+- Contact: phone, email, GitHub, LinkedIn and whether to include Instagram, with real URLs/handles.
+
 Design and architecture:
 - Station positions, camera coordinates, exact route and room layout (decided at the 3D greybox stage).
-- Whether GSAP and ScrollTrigger are the right fit for the camera system, or a simpler approach is better.
+- Whether GSAP and ScrollTrigger are the right fit for the camera system.
 - Typography, asset sourcing, file-size budgets and logo sources/licenses.
-
-Content (all need owner confirmation; see CONTENT.md section 3):
-- JAS WORLD internship: dates, responsibilities, technologies, achievements, outcomes.
-- Exact names, functionality, implementation details, links and prototype-vs-finished status for projects.
-- Which AI tools are actually used, and in which context.
-- Education: degree, dates, school details, certificates and verified links.
-- Contact: phone, email, GitHub, LinkedIn, and whether to include Instagram, with real URLs/handles.
-- Verified skills list.
 
 ## Exact next task
 
-**Check the GitHub Actions run for the latest main commit.** If installation or build fails, inspect the logs, make the smallest corrective change, and rerun CI. Do not start Stage 2 or add any 3D dependencies until Stage 1 has passed and the owner has reviewed it.
+**Check the latest GitHub Actions run for Stage 2.** If the build passes, perform a focused review of the typed data, section order and placeholder rendering, then stop for owner review. Do not start Stage 3 or add 3D dependencies until the Stage 2 review gate is approved.
