@@ -8,9 +8,9 @@ export default function ScrollCamera() {
   const camera = useThree((state) => state.camera) as PerspectiveCamera;
   const scrollY = useRef(0);
   const sectionOffsets = useRef<number[]>(STATIONS.map((station) => station.x));
-  const currentTarget = useRef(new Vector3(1, 1.35, -0.6));
-  const desiredTarget = useRef(new Vector3(1, 1.35, -0.6));
-  const desiredCamera = useRef(new Vector3(3.4, 4.4, 8.2));
+  const currentTarget = useRef(new Vector3(-2.4, 1.05, -0.05));
+  const desiredTarget = useRef(new Vector3(-2.4, 1.05, -0.05));
+  const desiredCamera = useRef(new Vector3(-0.9, 2.55, 5.9));
 
   useEffect(() => {
     const measureSections = () => {
@@ -45,12 +45,11 @@ export default function ScrollCamera() {
     const blend = MathUtils.smoothstep(MathUtils.clamp(rawBlend, 0, 1), 0, 1);
     const x = MathUtils.lerp(STATIONS[lower].x, STATIONS[upper].x, blend);
 
-    desiredTarget.current.set(x, 1.35, -0.6);
-    currentTarget.current.lerp(desiredTarget.current, 1 - Math.exp(-delta * 4));
-    // Keep the camera slightly to the right of each desk so the HTML panel
-    // on the left doesn't obscure the workstation that gives this page depth.
-    desiredCamera.current.set(x + 2.4, 4.4, 8.2);
-    camera.position.lerp(desiredCamera.current, 1 - Math.exp(-delta * 3));
+    desiredTarget.current.set(x, 1.05, -0.05);
+    currentTarget.current.lerp(desiredTarget.current, 1 - Math.exp(-delta * 3.5));
+    // A closer, eye-level view keeps the furnished studio legible beside HTML panels.
+    desiredCamera.current.set(x + 1.5, 2.55, 5.9);
+    camera.position.lerp(desiredCamera.current, 1 - Math.exp(-delta * 2.8));
     camera.lookAt(currentTarget.current);
   });
 
