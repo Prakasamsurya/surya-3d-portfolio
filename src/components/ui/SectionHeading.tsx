@@ -4,10 +4,10 @@ export default function SectionHeading({ eyebrow, title, number }: Props) {
   const headingId = `${title.toLowerCase()}-heading`;
   return (
     <div className="section-heading">
-      <p className="section-eyebrow">{eyebrow}</p>
+      {eyebrow && <p className="section-eyebrow">{eyebrow}</p>}
       <div className="section-title-row">
         <h2 id={headingId}>{title}</h2>
-        <span className="section-number" aria-hidden="true">{number}</span>
+        {number && <span className="section-number" aria-hidden="true">{number}</span>}
       </div>
     </div>
   );
