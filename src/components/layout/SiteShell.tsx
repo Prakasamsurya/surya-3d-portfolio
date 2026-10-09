@@ -28,7 +28,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       <main id="main-content" className="site-main">{children}</main>
       <footer className="site-footer">
         <span>Surya Prakasam</span>
-        <span>Portfolio foundation · Stage 1</span>
+        <span>Scroll to explore · 3D portfolio</span>
       </footer>
     </>
   );
