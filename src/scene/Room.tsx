@@ -115,10 +115,7 @@ export default function Room() {
         <boxGeometry args={[ROOM.length, ROOM.height, 0.18]} />
         <meshStandardMaterial color="#E9E4DA" roughness={0.98} />
       </mesh>
-      <mesh position={[ROOM.length / 2 - 1, ROOM.height / 2, ROOM.width / 2]} receiveShadow>
-        <boxGeometry args={[ROOM.length, ROOM.height, 0.18]} />
-        <meshStandardMaterial color="#E9E4DA" roughness={0.98} />
-      </mesh>
+      {/* Open the camera-facing side so the room interior and workstations are visible. */}
       <mesh position={[ROOM.length / 2 - 1, ROOM.height, 0]} receiveShadow>
         <boxGeometry args={[ROOM.length, 0.16, ROOM.width]} />
         <meshStandardMaterial color="#D9D2C5" roughness={0.95} />
