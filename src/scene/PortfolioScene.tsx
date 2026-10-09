@@ -21,17 +21,17 @@ export default function PortfolioScene() {
       <Canvas
         shadows
         dpr={[1, 1.5]}
-        camera={{ position: [1, 3.1, 8.8], fov: 48, near: 0.1, far: 100 }}
+        camera={{ position: [-0.9, 2.55, 5.9], fov: 43, near: 0.1, far: 100 }}
         gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
         onCreated={({ gl }) => {
           gl.domElement.addEventListener("webglcontextlost", () => setFailed(true), { once: true });
         }}
       >
         <color attach="background" args={["#E9E4DA"]} />
-        <ambientLight intensity={1.15} />
-        <hemisphereLight args={["#FFF8ED", "#B58B5E", 1.05]} />
-        <directionalLight position={[0, 7, 4]} intensity={2.2} castShadow shadow-mapSize={[1024, 1024]} />
-        <pointLight position={[7, 3.8, -2]} color="#FFB46B" intensity={12} distance={13} />
+        <ambientLight intensity={0.72} />
+        <hemisphereLight args={["#FFF8ED", "#8B725A", 0.9]} />
+        <directionalLight position={[-3, 6, 4]} intensity={2.4} castShadow shadow-mapSize={[1536, 1536]} />
+        <pointLight position={[-1.5, 3.2, -1.2]} color="#FFB46B" intensity={5} distance={9} />
         <Suspense fallback={null}>
           <Room />
         </Suspense>
