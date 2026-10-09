@@ -4,7 +4,7 @@ Read this file before starting any task. If it disagrees with the repository, ve
 
 ## Current stage
 
-**Stage 3 — 3D greybox implemented; visual review pending.** Stage 1 foundation, Stage 2 typed content, and the first connected-room greybox are committed. GitHub Actions production build passed for the current Stage 3 scene after a JSX typing fix. The code-level route review is complete; actual browser rendering and camera alignment still need visual review before this stage is approved.
+**Stage 3 — immersive scene redesign in progress; visual review pending.** The owner rejected the first room because the scene read as a flat content card beside low-detail desk props. The latest implementation replaces that set with the CC0 Downtown Office Interiors starter scene, widens the camera route, adds atmospheric lighting/fog, and art-directs the HTML panels as smaller alternating glass surfaces. Latest build for the redesign is pending. Browser rendering and camera alignment still require owner review.
 
 ## Repository and branch
 
@@ -31,10 +31,13 @@ Read this file before starting any task. If it disagrees with the repository, ve
 - Verified stable package compatibility before adding 3D dependencies: React Three Fiber v9 pairs with React 19; the stable v9.8.1 release includes React 19.3 compatibility. Drei v10.7.9, Three.js v0.186.1, and @types/three v0.186.0 are stable releases.
 - Added `@react-three/fiber`, `@react-three/drei`, `three`, and `@types/three`. Did not add GSAP: the current greybox uses one shared scroll-progress value and a small camera interpolation loop instead.
 - Added `src/scene/roomLayout.ts`, `Room.tsx`, `ScrollCamera.tsx`, and `PortfolioScene.tsx`.
-- Added one connected room with floor, walls, ceiling, seven repeated workstation blocks and a single camera that follows page scroll across the stations.
+- Initial greybox used repeated procedural workstations; the owner rejected the result as visually unconvincing.
+- Researched scroll-driven WebGL portfolio principles: the 3D environment should be the experience, with purposeful camera motion, depth, lighting, and HTML content that remains readable. References: https://webflow.com/blog/3d-design-website and https://www.webgpu.com/showcase/joseph-santamaria-3d-webgl-portfolio/.
+- Replaced the earlier workstation model with the CC0 Downtown Office Interiors GLB starter scene (106 office assets, 9.4 MB total pack, 221,300 triangles): https://3dassets.dev/packs/downtown-office-interiors.
+- Removed the mismatched handmade wall planes; kept one broad grounding floor, adjusted the camera route across the scene, introduced fog and layered lighting, and reduced the panel width with alternating composition.
 - Layered the decorative canvas behind the readable HTML content. Reduced-motion users receive the static HTML experience without the 3D canvas.
 - **Verification:** GitHub Actions production build passed for commit `f0b23a7f74899e34d04033e019854874f0949e67` (run `37974270738`). The initial build failed on React Three Fiber JSX intrinsic-element typing; adding `src/three-types.d.ts` fixed the issue.
-- **Code-level review:** confirmed the station sequence matches the approved section order and camera progress interpolates across all seven stations. This does not replace a visual browser review.
+- **Code-level review:** section order remains Intro → Skills → Experience → Projects → AI → Education → Contact, with scroll progress interpolating across all seven camera stations. The scene asset is loaded from a third-party CDN and requires network access. This does not replace a visual browser review.
 - **Still unverified:** browser rendering, camera framing/alignment at each section, mobile visual quality, WebGL failure handling, keyboard interaction in context, and real-device performance. This is a greybox, not the final art pass.
 
 ## Files added or modified
@@ -72,7 +75,8 @@ Removed: none.
 | Repository and six documentation files inspected | Pass |
 | Stage 1 dependency installation and production build | Pass |
 | Stage 2 dependency installation and production build | Pass |
-| Current Stage 3 dependency installation and production build | Pass — run [37974270738](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37974270738) |
+| Earlier Stage 3 dependency installation and production build | Pass — run [37974270738](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37974270738) |
+| Latest immersive redesign production build | Pending — run [37978466718](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37978466718) |
 | Manual browser and camera-route review | Not performed |
 | Keyboard, reduced-motion, mobile and no-WebGL manual checks | Not performed |
 | Performance profiling on real devices | Not performed |
@@ -81,7 +85,7 @@ Do not claim the greybox is complete until the latest build passes and the room/
 
 ## Approved decisions
 
-- Design direction: Clean 3D Realistic — Warm Studio.
+- Design direction: Clean 3D Realistic — Warm Studio, re-art-directed as a cinematic scroll-driven environment after owner rejected the first visual pass (2026-10-10).
 - Palette: walls `#E9E4DA`, floor `#B58B5E`, workstation `#2B2D31`, accent `#2F7F86`, lamp light `#FFB46B`. Derived accessibility colors allowed if documented.
 - Fixed section order: Intro, Skills, Experience, Projects, AI, Education, Contact.
 - One connected room with distinct functional stations, driven by scrolling camera movement.
@@ -92,7 +96,8 @@ Do not claim the greybox is complete until the latest build passes and the room/
 
 ## Pending work
 
-- Visually review the room and camera framing at all seven sections in a browser; automated build success does not establish visual correctness.
+- Confirm latest GitHub Actions build passes.
+- Owner to visually review the redesigned scene and camera framing at all seven sections in a browser; automated build success does not establish visual correctness.
 - Fix any route/framing issues found in visual review.
 - Complete the Stage 3 review gate before Stage 4 HTML interface/art work.
 
@@ -112,4 +117,4 @@ Design:
 
 ## Exact next task
 
-**Open the portfolio in a browser and visually review the greybox rendering and camera route across all seven sections.** The current production build already passes. Fix any visual issues found and update this status file with results that were actually verified. Do not proceed to the Warm Studio art pass until Stage 3 has passed visual review.
+**Wait for the latest redesign build, then have the owner refresh the local site and review all seven sections. Do not mark the visual gate passed until the owner confirms the scene looks right.** The current production build already passes. Fix any visual issues found and update this status file with results that were actually verified. Do not proceed to the Warm Studio art pass until Stage 3 has passed visual review.
