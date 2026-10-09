@@ -92,8 +92,8 @@ This structure is a proposal and may change with approval.
 | Documentation (six files) | Written in Task 1 |
 | Project scaffold | Implemented; build verification pending |
 | Content data | Not started |
-| Shared scene and camera | Not started |
-| Scroll-driven transitions | Not started |
+| Shared scene and camera | Greybox implemented; visual review pending |
+| Scroll-driven transitions | Greybox implemented; route review pending |
 | Section shells (seven ordered HTML sections) | Implemented as placeholders; full content components planned |
 | Accessibility and fallback | Not started |
 | Performance work | Not started |
