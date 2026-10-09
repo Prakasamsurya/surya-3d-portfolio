@@ -85,3 +85,14 @@ a:focus-visible, button:focus-visible { outline: 3px solid #245E63; outline-offs
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+.section-intro { max-width: 62ch; margin: 0 0 1.5rem; color: #4F4C46; font-size: 1.05rem; line-height: 1.75; }
+.fact-list { display: grid; gap: .85rem; margin: 0; }
+.fact-row { display: grid; grid-template-columns: minmax(8rem, .32fr) minmax(0, 1fr); gap: 1rem; padding-top: .85rem; border-top: 1px solid rgb(43 45 49 / 10%); }
+.fact-row dt { color: #245E63; font-size: .86rem; font-weight: 750; }
+.fact-row dd { margin: 0; min-width: 0; color: #4F4C46; line-height: 1.6; overflow-wrap: anywhere; }
+.fact-value--placeholder, .fact-value--pending-verification { display: inline-block; padding: .15rem .45rem; border-radius: .3rem; background: #F0E3CF; color: #593D1E; }
+.fact-value--verified { color: #34342F; }
+@media (max-width: 520px) {
+  .fact-row { grid-template-columns: 1fr; gap: .25rem; }
+}
