@@ -25,13 +25,13 @@ export default function PortfolioScene() {
           gl.domElement.addEventListener("webglcontextlost", () => setFailed(true), { once: true });
         }}
       >
-        <color attach="background" args={["#E9E4DA"]} />
-        <fog attach="fog" args={["#E9E4DA", 13, 28]} />
-        <ambientLight intensity={0.7} />
-        <hemisphereLight args={["#FFF8ED", "#4A5557", 1.1]} />
-        <directionalLight position={[-4, 7, 5]} intensity={2.4} />
-        <pointLight position={[2, 2.5, 1]} color="#FFB46B" intensity={5} distance={14} />
-        <pointLight position={[-3, -1, 3]} color="#4DC9C0" intensity={3.5} distance={12} />
+        <fog attach="fog" args={["#101619", 15, 34]} />
+        <ambientLight intensity={0.85} />
+        <hemisphereLight args={["#D5FFF9", "#172024", 1.35]} />
+        <directionalLight position={[-4, 7, 5]} intensity={2.1} color="#F5F2EA" />
+        <pointLight position={[2, 2.5, 1]} color="#FFB46B" intensity={7} distance={16} />
+        <pointLight position={[-3, -1, 3]} color="#4DC9C0" intensity={5} distance={15} />
+        <pointLight position={[0, -2, -2]} color="#8E91FF" intensity={2.5} distance={10} />
         <ScrollStoryScene />
       </Canvas>
     </div>
