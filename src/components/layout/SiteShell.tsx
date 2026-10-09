@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import PortfolioScene from "../../scene/PortfolioScene";
 
 const sections = [
   { id: "intro", label: "Intro" },
@@ -13,6 +14,7 @@ const sections = [
 export default function SiteShell({ children }: { children: ReactNode }) {
   return (
     <>
+      <PortfolioScene />
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="site-header">
         <a className="wordmark" href="#intro" aria-label="Surya Prakasam — Intro">
