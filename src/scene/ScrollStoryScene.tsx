@@ -216,6 +216,15 @@ export default function ScrollStoryScene() {
       const blend = span > 0 ? MathUtils.clamp((scrollY.current - measuredOffsets[lower]) / span, 0, 1) : 0;
       sectionProgress = lower + MathUtils.smoothstep(blend, 0, 1);
     }
+    const camera = state.camera;
+    const cameraX = 1.15 + Math.sin(sectionProgress * 0.92) * 0.58;
+    const cameraY = 0.18 + Math.cos(sectionProgress * 0.8) * 0.28;
+    const cameraZ = 8.4 - Math.sin(sectionProgress * Math.PI / 6) * 0.8;
+    camera.position.x = MathUtils.damp(camera.position.x, cameraX, 1.8, delta);
+    camera.position.y = MathUtils.damp(camera.position.y, cameraY, 1.8, delta);
+    camera.position.z = MathUtils.damp(camera.position.z, cameraZ, 1.8, delta);
+    camera.lookAt(0.45 + Math.sin(sectionProgress * 0.65) * 0.2, 0, 0);
+
     groups.current.forEach((group, index) => {
       if (!group) return;
       const distance = Math.abs(sectionProgress - index);
