@@ -1,6 +1,6 @@
 # ARCHITECTURE
 
-> **Everything in this document is planned architecture, not implemented functionality.** As of Task 1, no application code exists, no packages are installed, and nothing below has been built or verified. Versions and compatibility must be checked at the relevant implementation stage before installing.
+This document records the intended architecture and current implementation. Status labels distinguish implemented behavior from plans that still require verification.
 
 ## 1. Proposed stack
 
@@ -11,21 +11,21 @@
 | Build tool | Vite | Dev server and production build |
 | 3D | Three.js via React Three Fiber | Declarative 3D scene in React |
 | 3D helpers | Drei | Loaders, camera and performance helpers, where appropriate |
-| Scroll/animation | GSAP and ScrollTrigger | Coordinated scroll-driven camera movement, if appropriate |
+| Scroll/animation | Native scroll listeners + React Three Fiber frame loop | Camera interpolation tied to measured HTML section positions (implemented in greybox) |
 
-All are free to develop with. GSAP and ScrollTrigger are included on the condition that they are the right fit. A simpler scroll-progress approach is acceptable if it serves the camera system better, and that choice must be recorded as a decision.
+All listed tools are free to develop with. GSAP/ScrollTrigger are not installed: native scroll position measurement and camera interpolation are currently sufficient for the greybox.
 
 ## 2. Shared scene and camera system (planned)
 
 - **One** 3D scene and **one** camera for the whole portfolio, representing one connected room.
 - Seven stations, one per section, in the fixed order: Intro, Skills, Experience, Projects, AI, Education, Contact.
-- A camera controller owns the camera. It maps a single normalized scroll progress value to a position and look-at target along a route through the stations.
-- Station positions, camera coordinates and the exact route are **not defined here**. They are finalized at the 3D greybox stage and then recorded in this file.
+- `src/scene/ScrollCamera.tsx` owns the camera and interpolates its position and look-at target between stations based on measured document offsets for the seven matching HTML sections.
+- Initial station x positions are recorded in `src/scene/roomLayout.ts` at 1, 7, 13, 19, 25, 31 and 37. These are greybox values pending visual review.
 
 ## 3. Scroll-driven camera transitions (planned)
 
-- Page scroll produces a progress value. The camera controller consumes it and moves smoothly between stations.
-- The scroll source is a single, shared state, so the HTML layer and the 3D layer cannot drift apart.
+- Page scroll updates the current scroll position and the measured top offsets of each HTML section. The camera controller interpolates between adjacent stations as the user moves through those sections.
+- The HTML remains the document flow and navigation source; the 3D camera reads the same section elements by their IDs.
 - Active section is derived from progress and drives the visible HTML content, the URL hash or focus state, and navigation highlighting.
 - Under `prefers-reduced-motion`, transitions become minimal or instant (see section 8).
 
