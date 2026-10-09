@@ -96,3 +96,22 @@ a:focus-visible, button:focus-visible { outline: 3px solid #245E63; outline-offs
 @media (max-width: 520px) {
   .fact-row { grid-template-columns: 1fr; gap: .25rem; }
 }
+
+.scene-layer { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.scene-layer canvas { display: block; width: 100%; height: 100%; }
+.site-header, .site-main, .site-footer { position: relative; z-index: 1; }
+.site-main { pointer-events: none; }
+.site-main .portfolio-section { pointer-events: none; }
+.site-main .section-content { pointer-events: auto; }
+.site-header, .site-footer { pointer-events: auto; }
+.scene-fallback {
+  position: fixed; inset: auto 1rem 1rem; z-index: 0; padding: .8rem 1rem;
+  border: 1px solid rgb(43 45 49 / 14%); border-radius: .75rem;
+  background: #F7F4EE; color: #2B2D31; font-size: .9rem;
+}
+@media (max-width: 760px) {
+  .scene-layer { opacity: .48; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene-layer { display: none; }
+}
