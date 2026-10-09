@@ -282,14 +282,19 @@ export default function ScrollStoryScene() {
       sectionProgress = lower + MathUtils.smoothstep(blend, 0, 1);
     }
     const mobile = state.size.width <= 760;
+    const activeChapter = Math.round(sectionProgress);
+    if (rootGroup.current) {
+      const sceneSide = mobile ? 0.45 : activeChapter % 2 === 0 ? 1.25 : -1.25;
+      rootGroup.current.position.x = MathUtils.damp(rootGroup.current.position.x, sceneSide, 1.7, delta);
+    }
     const camera = state.camera;
-    const cameraX = mobile ? 0.65 : 1.15 + Math.sin(sectionProgress * 0.92) * 0.38;
+    const cameraX = mobile ? 0.65 : Math.sin(sectionProgress * 0.92) * 0.18;
     const cameraY = mobile ? -0.1 : 0.18 + Math.cos(sectionProgress * 0.8) * 0.2;
     const cameraZ = mobile ? 10.2 : 8.8 - Math.sin(sectionProgress * Math.PI / 6) * 0.45;
     camera.position.x = MathUtils.damp(camera.position.x, cameraX, 1.8, delta);
     camera.position.y = MathUtils.damp(camera.position.y, cameraY, 1.8, delta);
     camera.position.z = MathUtils.damp(camera.position.z, cameraZ, 1.8, delta);
-    camera.lookAt(mobile ? 1.05 : 0.45 + Math.sin(sectionProgress * 0.65) * 0.15, 0, 0);
+    camera.lookAt(mobile ? 0.45 : 0, 0, 0);
 
     groups.current.forEach((group, index) => {
       if (!group) return;
