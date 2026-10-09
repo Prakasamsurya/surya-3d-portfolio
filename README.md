@@ -1,6 +1,6 @@
 # Surya Prakasam — 3D Portfolio
 
-> **Status: documentation setup only (Task 1).** No application code has been written and no dependencies have been installed. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) for the exact current state.
+> **Status: Stage 1 — application foundation in progress.** The React + TypeScript + Vite scaffold and seven ordered section shells have been committed. The build workflow is running; no 3D implementation or 3D dependencies have been added. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) for verification status.
 
 ## 1. Project overview and vision
 
@@ -67,7 +67,7 @@ Stage boundaries and review gates are defined in [WORKFLOW.md](WORKFLOW.md). Sta
 
 ## 6. Current project status
 
-Stage 0 (documentation setup) is being performed. No application code exists. The next task is a human review of these documents, followed by the application foundation. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
+Stage 0 documentation is committed. Stage 1 foundation files are now committed to `main`; GitHub Actions build verification is pending. No 3D scene exists yet. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## 7. How the project is developed, reviewed and verified
 
