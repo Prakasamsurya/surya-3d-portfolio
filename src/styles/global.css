@@ -58,9 +58,10 @@ a:focus-visible, button:focus-visible { outline: 3px solid #245E63; outline-offs
 .intro-section { min-height: min(82vh, 760px); }
 .contact-section { border-bottom: 0; }
 .section-content {
-  width: min(100%, 820px); padding: clamp(1.5rem, 5vw, 3.5rem);
-  border: 1px solid rgb(43 45 49 / 10%); border-radius: 1.5rem;
-  background: var(--color-panel); box-shadow: 0 1.5rem 4rem rgb(43 45 49 / 7%);
+  width: min(100%, 660px); margin-right: auto; padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid rgb(43 45 49 / 12%); border-radius: 1.5rem;
+  background: rgb(247 244 238 / 91%); backdrop-filter: blur(5px);
+  box-shadow: 0 1.5rem 4rem rgb(43 45 49 / 12%);
 }
 .section-heading { margin-bottom: 1.5rem; }
 .section-eyebrow { margin: 0 0 .8rem; color: #245E63; font-size: .76rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
