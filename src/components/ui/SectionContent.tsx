@@ -66,7 +66,11 @@ export default function SectionContent({ content, className = "" }: Props) {
                   className={`fact-value fact-value--${fact.status}`}
                   data-content-status={fact.status}
                 >
-                  {fact.value}
+                  {fact.status === "placeholder"
+                    ? "Details being finalized"
+                    : fact.status === "pending-verification"
+                      ? "Awaiting confirmation"
+                      : fact.value}
                 </span>
               </dd>
             </div>
