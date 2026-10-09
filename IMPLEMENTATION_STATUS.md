@@ -81,7 +81,7 @@ Do not treat the scaffold as build-verified until the CI run is checked and any 
 
 ## Pending work
 
-- Verify GitHub Actions install/build result; fix any errors before marking Stage 1 complete.
+- Verify the rerun after adding `src/vite-env.d.ts`. If it passes, perform the Stage 1 owner review; if it fails, inspect logs and fix the specific error before proceeding.
 - Owner review at the Stage 1 gate.
 - Stage 2 content data and placeholder conventions, only after Stage 1 passes review.
 
