@@ -1,6 +1,5 @@
 import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Loader } from "@react-three/drei";
 import Room from "./Room";
 import ScrollCamera from "./ScrollCamera";
 
@@ -38,7 +37,6 @@ export default function PortfolioScene() {
         </Suspense>
         <ScrollCamera />
       </Canvas>
-      <Loader />
     </div>
   );
 }
