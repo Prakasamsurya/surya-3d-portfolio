@@ -4,7 +4,7 @@ Read this file before starting any task. If it disagrees with the repository, ve
 
 ## Current stage
 
-**Stage 3 — seven-chapter scroll-driven 3D redesign in progress; visual review pending.** The owner clarified that every section needs its own 3D animation and scroll-controlled transition, not a shared office backdrop. A new procedural chapter scene has been added for Intro, Skills, Experience, Projects, AI, Education and Contact, with different 3D forms and continuous scale/rotation transitions driven by each section's scroll position. Latest build is pending. Browser rendering, visual quality and performance still require review.
+**Stage 3 — cinematic seven-chapter 3D implementation in progress; visual review pending.** Each section (Intro, Skills, Experience, Projects, AI, Education and Contact) has a distinct procedural 3D form. Scroll progress drives chapter visibility, rotation and camera choreography. HTML chapter panels animate into view, the navigation highlights the active section, and mobile-specific scene framing and horizontally scrollable navigation have been added. Recent CI builds passed through the chapter/navigation work; the latest responsive commits are running or awaiting CI. Browser rendering, visual quality and performance still require review.
 
 ## Repository and branch
 
@@ -77,7 +77,9 @@ Removed: none.
 | Stage 1 dependency installation and production build | Pass |
 | Stage 2 dependency installation and production build | Pass |
 | Earlier Stage 3 dependency installation and production build | Pass — run [37974270738](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37974270738) |
-| Latest seven-chapter 3D production build | Pending — run [37978978359](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37978978359) |
+| Seven-chapter 3D, chapter reveals, active navigation and README checks | Pass — latest completed run [37979731940](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37979731940) |
+| Responsive mobile navigation and chapter spacing | In progress — run [37979910529](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37979910529) |
+| Mobile-specific 3D scene framing | Commit pushed; CI run to be confirmed |
 | Manual browser and camera-route review | Not performed |
 | Keyboard, reduced-motion, mobile and no-WebGL manual checks | Not performed |
 | Performance profiling on real devices | Not performed |
@@ -86,10 +88,10 @@ Do not claim the greybox is complete until the latest build passes and the room/
 
 ## Approved decisions
 
-- Design direction: Clean 3D Realistic — Warm Studio, re-art-directed as a cinematic scroll-driven environment after owner rejected the first visual pass (2026-10-10).
-- Palette: walls `#E9E4DA`, floor `#B58B5E`, workstation `#2B2D31`, accent `#2F7F86`, lamp light `#FFB46B`. Derived accessibility colors allowed if documented.
+- Design direction: cinematic, dark, scroll-driven 3D chapters after owner rejected the first static-looking visual pass (2026-10-10).
+- Palette: dark cinematic base `#101619`, panels `#182124`, text `#F5F2EA`, teal accent `#4DC9C0`, warm light `#FFB46B`. Derived accessibility colors allowed if documented.
 - Fixed section order: Intro, Skills, Experience, Projects, AI, Education, Contact.
-- One connected room with distinct functional stations, driven by scrolling camera movement.
+- Seven distinct chapter-specific 3D compositions with scroll-linked camera and form transitions; no shared office backdrop.
 - All portfolio content remains readable HTML, not text embedded in 3D objects.
 - Stack: React, TypeScript, Vite, Three.js through React Three Fiber and Drei. Current greybox uses native scroll progress for the camera; GSAP is not included unless a future tested need is recorded.
 - Approved factual content and six project categories as recorded in CONTENT.md.
@@ -118,4 +120,4 @@ Design:
 
 ## Exact next task
 
-**Wait for the seven-chapter scene build, then have the owner refresh the local site and review the scroll-driven 3D transitions at every section. Do not mark the visual gate passed until the owner confirms the result.** The current production build already passes. Fix any visual issues found and update this status file with results that were actually verified. Do not proceed to the Warm Studio art pass until Stage 3 has passed visual review.
+**Continue responsive and interaction polish, confirm CI for the mobile layout and mobile 3D framing commits, and keep visual review explicitly pending.** Automated build success does not establish visual correctness; no browser visual review has been performed. Do not claim the visual gate passed without an actual browser review.
