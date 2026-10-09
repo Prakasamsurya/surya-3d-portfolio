@@ -2,7 +2,7 @@ import { STATIONS, ROOM } from "./roomLayout";
 
 function Desk({ x, accent }: { x: number; accent: string }) {
   return (
-    <group position={[x, 0, 0}>
+    <group position={[x, 0, 0]}>
       <mesh position={[0, 1.15, 0]} castShadow receiveShadow>
         <boxGeometry args={[2.8, 0.16, 1.35]} />
         <meshStandardMaterial color="#2B2D31" roughness={0.72} />
