@@ -90,11 +90,11 @@ This structure is a proposal and may change with approval.
 | Item | Status |
 | --- | --- |
 | Documentation (six files) | Written in Task 1 |
-| Project scaffold | Not started |
+| Project scaffold | Implemented; build verification pending |
 | Content data | Not started |
 | Shared scene and camera | Not started |
 | Scroll-driven transitions | Not started |
-| Section components | Not started |
+| Section shells (seven ordered HTML sections) | Implemented as placeholders; full content components planned |
 | Accessibility and fallback | Not started |
 | Performance work | Not started |
 
