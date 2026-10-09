@@ -2,7 +2,7 @@ import { STATIONS, ROOM } from "./roomLayout";
 
 function Desk({ x, accent }: { x: number; accent: string }) {
   return (
-    <group position={[x, 0, 0]}>
+    <group position={[x, 0, 0}>
       <mesh position={[0, 1.15, 0]} castShadow receiveShadow>
         <boxGeometry args={[2.8, 0.16, 1.35]} />
         <meshStandardMaterial color="#2B2D31" roughness={0.72} />
@@ -37,6 +37,32 @@ function Desk({ x, accent }: { x: number; accent: string }) {
         <boxGeometry args={[2.45, 0.08, 1.12]} />
         <meshStandardMaterial color="#B58B5E" roughness={0.95} />
       </mesh>
+
+      {/* A visible ergonomic chair anchors each station as a real workspace. */}
+      <group position={[0, 0, 2.05]}>
+        <mesh position={[0, 0.58, 0.18]} castShadow>
+          <boxGeometry args={[0.78, 0.14, 0.72]} />
+          <meshStandardMaterial color="#2B2D31" roughness={0.82} />
+        </mesh>
+        <mesh position={[0, 1.12, -0.12]} castShadow>
+          <boxGeometry args={[0.72, 0.92, 0.14]} />
+          <meshStandardMaterial color="#34363A" roughness={0.86} />
+        </mesh>
+        <mesh position={[0, 0.25, 0.18]} castShadow>
+          <cylinderGeometry args={[0.07, 0.09, 0.48, 16]} />
+          <meshStandardMaterial color="#777A7B" metalness={0.55} roughness={0.38} />
+        </mesh>
+        <mesh position={[0, 0.05, 0.18]} castShadow>
+          <cylinderGeometry args={[0.42, 0.42, 0.07, 20]} />
+          <meshStandardMaterial color="#34363A" roughness={0.8} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * 0.38, 0.07, 0.18]} rotation={[0, 0, Math.PI / 2]} castShadow>
+            <cylinderGeometry args={[0.035, 0.035, 0.72, 10]} />
+            <meshStandardMaterial color="#777A7B" metalness={0.5} roughness={0.4} />
+          </mesh>
+        ))}
+      </group>
     </group>
   );
 }
@@ -58,6 +84,25 @@ function WallShelf({ x }: { x: number }) {
   );
 }
 
+function FloorDetails() {
+  return (
+    <group>
+      {Array.from({ length: 21 }, (_, index) => (
+        <mesh key={index} position={[index * 2 - 1, 0.005, 0]} receiveShadow>
+          <boxGeometry args={[0.018, 0.008, ROOM.width - 0.3]} />
+          <meshStandardMaterial color="#8D6846" roughness={1} />
+        </mesh>
+      ))}
+      {[-1, 1].map((side) => (
+        <mesh key={side} position={[ROOM.length / 2 - 1, 0.14, side * (ROOM.width / 2 - 0.16)]}>
+          <boxGeometry args={[ROOM.length, 0.25, 0.12]} />
+          <meshStandardMaterial color="#9A7959" roughness={0.9} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
 export default function Room() {
   return (
     <group>
@@ -65,6 +110,7 @@ export default function Room() {
         <boxGeometry args={[ROOM.length, 0.24, ROOM.width]} />
         <meshStandardMaterial color="#B58B5E" roughness={0.92} />
       </mesh>
+      <FloorDetails />
       <mesh position={[ROOM.length / 2 - 1, ROOM.height / 2, -ROOM.width / 2]} receiveShadow>
         <boxGeometry args={[ROOM.length, ROOM.height, 0.18]} />
         <meshStandardMaterial color="#E9E4DA" roughness={0.98} />
