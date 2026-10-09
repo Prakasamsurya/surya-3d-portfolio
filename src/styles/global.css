@@ -51,7 +51,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #4DC9C0; outline-offs
   font-size: .82rem; font-weight: 650; text-decoration: none;
   transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
-.primary-nav a:hover, .primary-nav a:focus-visible { background: #4DC9C0; color: #101619; transform: translateY(-1px); }
+.primary-nav a:hover, .primary-nav a:focus-visible, .primary-nav a[aria-current="location"] { background: #4DC9C0; color: #101619; transform: translateY(-1px); box-shadow: 0 0 1.5rem rgb(77 201 192 / 15%); }
 .site-main { width: min(100% - 3rem, var(--content-width)); margin-inline: auto; }
 .portfolio-section {
   display: flex; min-height: max(88svh, 720px); align-items: center;
