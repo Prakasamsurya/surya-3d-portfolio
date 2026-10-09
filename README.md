@@ -1,6 +1,6 @@
 # Surya Prakasam — 3D Portfolio
 
-> **Status: Stage 1 — application foundation in progress.** The React + TypeScript + Vite scaffold and seven ordered section shells have been committed. The build workflow is running; no 3D implementation or 3D dependencies have been added. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) for verification status.
+> **Status: Stage 3 — 3D greybox in progress.** The React + TypeScript + Vite foundation, typed content layer, and first connected-room scene with scroll-driven camera are committed. Stage 1 and 2 builds passed; the current 3D build and visual route review are pending. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## 1. Project overview and vision
 
