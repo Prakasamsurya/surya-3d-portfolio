@@ -21,17 +21,28 @@ export default function PortfolioScene() {
       <Canvas
         shadows
         dpr={[1, 1.5]}
-        camera={{ position: [-0.9, 2.55, 5.9], fov: 43, near: 0.1, far: 100 }}
+        camera={{ position: [-1.6, 3.1, 8.5], fov: 39, near: 0.1, far: 120 }}
         gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
         onCreated={({ gl }) => {
           gl.domElement.addEventListener("webglcontextlost", () => setFailed(true), { once: true });
         }}
       >
         <color attach="background" args={["#E9E4DA"]} />
-        <ambientLight intensity={0.72} />
-        <hemisphereLight args={["#FFF8ED", "#8B725A", 0.9]} />
-        <directionalLight position={[-3, 6, 4]} intensity={2.4} castShadow shadow-mapSize={[1536, 1536]} />
-        <pointLight position={[-1.5, 3.2, -1.2]} color="#FFB46B" intensity={5} distance={9} />
+        <fog attach="fog" args={["#E9E4DA", 16, 36]} />
+        <ambientLight intensity={0.55} />
+        <hemisphereLight args={["#FFF8ED", "#705C4A", 1.15]} />
+        <directionalLight
+          position={[-5, 9, 5]}
+          intensity={2.8}
+          castShadow
+          shadow-mapSize={[2048, 2048]}
+          shadow-camera-left={-12}
+          shadow-camera-right={12}
+          shadow-camera-top={12}
+          shadow-camera-bottom={-12}
+        />
+        <pointLight position={[-3, 3.8, -2]} color="#FFB46B" intensity={7} distance={18} />
+        <pointLight position={[5, 3, 4]} color="#B8D8D5" intensity={2.5} distance={16} />
         <Suspense fallback={null}>
           <Room />
         </Suspense>
