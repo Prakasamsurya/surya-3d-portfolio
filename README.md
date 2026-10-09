@@ -1,26 +1,22 @@
 # Surya Prakasam — 3D Portfolio
 
-> **Status: Stage 3 — 3D greybox implemented; visual review pending.** The React + TypeScript + Vite foundation, typed content layer, connected-room scene and scroll-driven camera are committed. GitHub Actions production build passes for the current scene. Browser rendering and camera-route review have not yet been performed. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
+> **Status: Scroll-driven 3D redesign in progress.** The site now has seven distinct procedural 3D chapter compositions, scroll-linked camera motion, cinematic lighting, animated HTML content reveals, and active-section navigation. Latest changes are being verified by GitHub Actions. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## 1. Project overview and vision
 
-A distinctive, immersive personal portfolio for **Surya Prakasam**.
-
-The finished site will be a continuous, vertically navigable 3D environment representing a realistic developer and creative workstation. Scrolling guides the camera through connected functional areas of **one room**, and each area represents one portfolio section.
-
-The room should feel believable, warm, polished and purposeful, while staying performance-friendly. It deliberately avoids a generic cyberpunk aesthetic.
+A distinctive, immersive personal portfolio for **Surya Prakasam**. The site is a scroll-led visual story: each of the seven portfolio chapters has its own 3D composition, animated transition, and supporting HTML content. Scrolling shifts both the active 3D form and camera framing, rather than moving through a single static backdrop.
 
 ## 2. Approved design direction
 
-**Clean 3D Realistic — Warm Studio.**
+**Cinematic dark 3D — teal and amber lighting.**
 
 | Role | Hex |
 | --- | --- |
-| Walls | `#E9E4DA` |
-| Floor | `#B58B5E` |
-| Workstation | `#2B2D31` |
-| Accent | `#2F7F86` |
-| Lamp light | `#FFB46B` |
+| Environment | `#101619` |
+| Panels | `#182124` |
+| Main text | `#F5F2EA` |
+| Accent | `#4DC9C0` |
+| Warm light | `#FFB46B` |
 
 Full rules, restrictions and accessibility requirements are in [DESIGN.md](DESIGN.md). All portfolio content stays as readable HTML, never text embedded in 3D objects.
 
@@ -34,11 +30,11 @@ Full rules, restrictions and accessibility requirements are in [DESIGN.md](DESIG
 6. Education
 7. Contact
 
-Initial greybox station positions and camera route are implemented in `src/scene/roomLayout.ts` and `src/scene/ScrollCamera.tsx`. They remain subject to visual review.
+The seven procedural chapter forms and their scroll choreography are implemented in `src/scene/ScrollStoryScene.tsx`.
 
 ## 4. Proposed technology stack
 
-The implemented foundation uses the following stack; later-stage choices may be adjusted only when documented and verified.
+The implemented site uses the following stack:
 
 - React
 - TypeScript
@@ -56,9 +52,9 @@ All are free to develop with. Details are in [ARCHITECTURE.md](ARCHITECTURE.md).
 | 0 | Documentation setup | Six docs and handoff protocol (Task 1) |
 | 1 | Application foundation | Vite + React + TypeScript scaffold, tooling, empty section shells |
 | 2 | Content layer | Typed content data and placeholder conventions from CONTENT.md |
-| 3 | 3D greybox | Single room, station blocking, camera route, scroll-driven camera |
+| 3 | Scroll-driven 3D story | Seven unique procedural scenes, camera choreography, chapter transitions |
 | 4 | HTML interface | Accessible section components layered over the scene |
-| 5 | Warm Studio art pass | Palette, lighting, materials, optimized assets |
+| 5 | Cinematic art pass | Dark palette, teal/amber lighting, glass panels, chapter reveal motion |
 | 6 | Accessibility and fallbacks | Keyboard nav, reduced motion, no-WebGL fallback, mobile layout |
 | 7 | Performance and polish | Asset budgets, profiling, cross-browser checks |
 | 8 | Content verification and release | Replace placeholders with verified facts, deploy |
@@ -67,7 +63,7 @@ Stage boundaries and review gates are defined in [WORKFLOW.md](WORKFLOW.md). Sta
 
 ## 6. Current project status
 
-Stage 0 documentation is committed. Stage 1 foundation, Stage 2 typed content, and the first Stage 3 connected-room greybox are committed to `main`. The current Stage 3 GitHub Actions production build passed; visual route review remains pending. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
+The React + TypeScript + Vite foundation and typed content layer are committed to `main`. The current direction is a cinematic scroll-driven 3D portfolio with per-section forms, animated content, and scroll-linked camera motion. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## 7. How the project is developed, reviewed and verified
 
