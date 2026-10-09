@@ -185,13 +185,12 @@ const forms = [IntroForm, SkillsForm, ExperienceForm, ProjectsForm, AIForm, Educ
 
 export default function ScrollStoryScene() {
   const groups = useRef<Array<Group | null>>([]);
-  const scroll = useRef(0);
+  const scrollY = useRef(0);
   const offsets = useRef<number[]>([]);
 
   useEffect(() => {
     const measure = () => {
-      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      scroll.current = MathUtils.clamp(window.scrollY / maxScroll, 0, 1) * (SECTION_IDS.length - 1);
+      scrollY.current = window.scrollY;
       offsets.current = SECTION_IDS.map((id) => {
         const element = document.getElementById(id);
         return element ? element.getBoundingClientRect().top + window.scrollY : 0;
@@ -207,13 +206,22 @@ export default function ScrollStoryScene() {
   }, []);
 
   useFrame((state, delta) => {
-    const sectionProgress = scroll.current;
+    const measuredOffsets = offsets.current;
+    let sectionProgress = 0;
+    if (measuredOffsets.length > 1) {
+      let lower = 0;
+      while (lower < measuredOffsets.length - 2 && scrollY.current >= measuredOffsets[lower + 1]) lower += 1;
+      const upper = Math.min(lower + 1, measuredOffsets.length - 1);
+      const span = measuredOffsets[upper] - measuredOffsets[lower];
+      const blend = span > 0 ? MathUtils.clamp((scrollY.current - measuredOffsets[lower]) / span, 0, 1) : 0;
+      sectionProgress = lower + MathUtils.smoothstep(blend, 0, 1);
+    }
     groups.current.forEach((group, index) => {
       if (!group) return;
       const distance = Math.abs(sectionProgress - index);
       const visibility = 1 - MathUtils.smoothstep(distance, 0.18, 0.95);
       const targetScale = 0.001 + visibility * (index === 0 ? 0.92 : 0.78);
-      group.scale.lerp({ x: targetScale, y: targetScale, z: targetScale } as never, 1 - Math.exp(-delta * 5));
+      group.scale.lerp({ x: targetScale, y: targetScale, z: targetScale } as import("three").Vector3, 1 - Math.exp(-delta * 5));
       group.rotation.y += delta * (0.12 + visibility * 0.22) * (index % 2 === 0 ? 1 : -1);
       group.rotation.x = MathUtils.damp(group.rotation.x, Math.sin(state.clock.elapsedTime * 0.45 + index) * 0.08, 2, delta);
       group.position.y = Math.sin(state.clock.elapsedTime * 0.7 + index * 1.4) * 0.13 + (1 - visibility) * -0.35;
