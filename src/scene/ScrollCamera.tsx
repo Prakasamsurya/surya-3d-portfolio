@@ -6,36 +6,56 @@ import { STATIONS } from "./roomLayout";
 
 export default function ScrollCamera() {
   const camera = useThree((state) => state.camera) as PerspectiveCamera;
-  const progress = useRef(0);
+  const scrollY = useRef(0);
+  const sectionOffsets = useRef<number[]>(STATIONS.map((station) => station.x));
   const currentTarget = useRef(new Vector3(1, 1.8, 0));
   const desiredTarget = useRef(new Vector3(1, 1.8, 0));
+  const desiredCamera = useRef(new Vector3(1, 3.1, 8.8));
 
   useEffect(() => {
-    const updateProgress = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      progress.current = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    const measureSections = () => {
+      scrollY.current = window.scrollY;
+      sectionOffsets.current = STATIONS.map((station) => {
+        const section = document.getElementById(station.id);
+        return section
+          ? section.getBoundingClientRect().top + window.scrollY
+          : 0;
+      });
     };
-    updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+
+    measureSections();
+    window.addEventListener("scroll", measureSections, { passive: true });
+    window.addEventListener("resize", measureSections);
     return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
+      window.removeEventListener("scroll", measureSections);
+      window.removeEventListener("resize", measureSections);
     };
   }, []);
 
   useFrame((_, delta) => {
-    const stationIndex = progress.current * (STATIONS.length - 1);
-    const lower = Math.floor(stationIndex);
+    const offsets = sectionOffsets.current;
+    let lower = 0;
+
+    while (
+      lower < offsets.length - 2 &&
+      scrollY.current >= offsets[lower + 1]
+    ) {
+      lower += 1;
+    }
+
     const upper = Math.min(lower + 1, STATIONS.length - 1);
-    const blend = MathUtils.smoothstep(stationIndex - lower, 0, 1);
+    const span = offsets[upper] - offsets[lower];
+    const rawBlend = span > 0
+      ? (scrollY.current - offsets[lower]) / span
+      : 0;
+    const blend = MathUtils.smoothstep(MathUtils.clamp(rawBlend, 0, 1), 0, 1);
     const x = MathUtils.lerp(STATIONS[lower].x, STATIONS[upper].x, blend);
 
     desiredTarget.current.set(x, 1.7, -0.5);
     currentTarget.current.lerp(desiredTarget.current, 1 - Math.exp(-delta * 4));
 
-    const targetCamera = new Vector3(x, 3.1, 8.8);
-    camera.position.lerp(targetCamera, 1 - Math.exp(-delta * 3));
+    desiredCamera.current.set(x, 3.1, 8.8);
+    camera.position.lerp(desiredCamera.current, 1 - Math.exp(-delta * 3));
     camera.lookAt(currentTarget.current);
   });
 
