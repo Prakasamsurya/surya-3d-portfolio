@@ -4,7 +4,7 @@ Read this file before starting any task. If it disagrees with the repository, ve
 
 ## Current stage
 
-**Stage 3 — 3D greybox (in progress).** Stage 1 foundation and Stage 2 typed content are committed. Their GitHub Actions production builds passed. The first connected-room greybox, seven desk stations, fixed 3D canvas, and scroll-driven camera are now committed; the current Stage 3 build check must pass before this stage is reviewed as complete.
+**Stage 3 — 3D greybox implemented; visual review pending.** Stage 1 foundation, Stage 2 typed content, and the first connected-room greybox are committed. GitHub Actions production build passed for the current Stage 3 scene after a JSX typing fix. The code-level route review is complete; actual browser rendering and camera alignment still need visual review before this stage is approved.
 
 ## Repository and branch
 
@@ -33,7 +33,9 @@ Read this file before starting any task. If it disagrees with the repository, ve
 - Added `src/scene/roomLayout.ts`, `Room.tsx`, `ScrollCamera.tsx`, and `PortfolioScene.tsx`.
 - Added one connected room with floor, walls, ceiling, seven repeated workstation blocks and a single camera that follows page scroll across the stations.
 - Layered the decorative canvas behind the readable HTML content. Reduced-motion users receive the static HTML experience without the 3D canvas.
-- **Not yet verified:** current Stage 3 production build, browser rendering, camera alignment across every section, mobile visual quality, WebGL failure handling, and performance. This is a greybox, not the final art pass.
+- **Verification:** GitHub Actions production build passed for commit `f0b23a7f74899e34d04033e019854874f0949e67` (run `37974270738`). The initial build failed on React Three Fiber JSX intrinsic-element typing; adding `src/three-types.d.ts` fixed the issue.
+- **Code-level review:** confirmed the station sequence matches the approved section order and camera progress interpolates across all seven stations. This does not replace a visual browser review.
+- **Still unverified:** browser rendering, camera framing/alignment at each section, mobile visual quality, WebGL failure handling, keyboard interaction in context, and real-device performance. This is a greybox, not the final art pass.
 
 ## Files added or modified
 
@@ -70,7 +72,7 @@ Removed: none.
 | Repository and six documentation files inspected | Pass |
 | Stage 1 dependency installation and production build | Pass |
 | Stage 2 dependency installation and production build | Pass |
-| Current Stage 3 dependency installation and production build | Pending; check latest GitHub Actions run |
+| Current Stage 3 dependency installation and production build | Pass — run [37974270738](https://github.com/Prakasamsurya/surya-3d-portfolio/actions/runs/37974270738) |
 | Manual browser and camera-route review | Not performed |
 | Keyboard, reduced-motion, mobile and no-WebGL manual checks | Not performed |
 | Performance profiling on real devices | Not performed |
@@ -90,9 +92,9 @@ Do not claim the greybox is complete until the latest build passes and the room/
 
 ## Pending work
 
-- Verify the current Stage 3 GitHub Actions build and fix any errors.
-- Review the camera route and alignment with all seven HTML sections.
-- Complete Stage 3 review gate before Stage 4 HTML interface/art work.
+- Visually review the room and camera framing at all seven sections in a browser; automated build success does not establish visual correctness.
+- Fix any route/framing issues found in visual review.
+- Complete the Stage 3 review gate before Stage 4 HTML interface/art work.
 
 ## Unresolved questions
 
@@ -110,4 +112,4 @@ Design:
 
 ## Exact next task
 
-**Check the latest GitHub Actions run for Stage 3.** If it passes, review the greybox rendering and camera route. Fix any errors found and update this status file with verified results. Do not proceed to the Warm Studio art pass until Stage 3 has passed review.
+**Open the portfolio in a browser and visually review the greybox rendering and camera route across all seven sections.** The current production build already passes. Fix any visual issues found and update this status file with results that were actually verified. Do not proceed to the Warm Studio art pass until Stage 3 has passed visual review.
