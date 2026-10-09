@@ -45,7 +45,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #4DC9C0; outline-offs
   display: grid; width: 2.25rem; aspect-ratio: 1; place-items: center; border-radius: 50%;
   background: #4DC9C0; color: #101619; font-size: .72rem; letter-spacing: .04em;
 }
-.primary-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .2rem; }
+.primary-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .2rem; min-width: 0; }
 .primary-nav a {
   padding: .55rem .7rem; border-radius: 999px; color: #A8B2B2;
   font-size: .82rem; font-weight: 650; text-decoration: none;
@@ -154,18 +154,27 @@ a:focus-visible, button:focus-visible { outline: 3px solid #4DC9C0; outline-offs
   .portfolio-section .section-content { opacity: 1; transform: none; }
   .fact-row { opacity: 1; transform: none; transition-delay: 0ms; }
   .site-header { position: sticky; align-items: flex-start; flex-direction: column; gap: .65rem; padding: .75rem 1rem; }
-  .primary-nav { justify-content: flex-start; width: 100%; gap: .12rem; }
-  .primary-nav a { padding: .45rem .58rem; font-size: .78rem; }
+  .primary-nav { justify-content: flex-start; width: 100%; gap: .12rem; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; padding: 0 0 .2rem; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .primary-nav::-webkit-scrollbar { display: none; }
+  .primary-nav a { flex: 0 0 auto; white-space: nowrap; padding: .45rem .58rem; font-size: .78rem; }
   .site-main { width: min(100% - 1.25rem, var(--content-width)); }
   .portfolio-section, .intro-section, .contact-section { min-height: max(76svh, 590px); padding-block: 2.6rem; }
   .section-content { width: min(100%, 560px); padding: 1.4rem; border-radius: 1.15rem; background: linear-gradient(145deg, rgb(22 31 34 / 92%), rgb(17 24 27 / 88%)); }
   .section-title-row h2 { font-size: clamp(2.5rem, 11vw, 3.8rem); }
-  .scene-layer { opacity: .88; }
+  .scene-layer { opacity: .78; }
+  .scene-layer canvas { touch-action: pan-y; }
 }
 @media (max-width: 520px) {
   .fact-row { grid-template-columns: 1fr; gap: .25rem; }
   .portfolio-section, .intro-section, .contact-section { min-height: auto; padding-block: 2.25rem; }
   .section-content { padding: 1.25rem; }
+  .section-kicker { margin-bottom: 1.2rem; font-size: .61rem; }
+  .section-title-row { gap: .5rem; }
+  .section-title-row h2 { font-size: clamp(2.35rem, 12vw, 3.2rem); }
+  .section-number { font-size: .68rem; }
+  .section-intro { font-size: .94rem; }
+  .fact-row dd { font-size: .86rem; }
+  .section-bottomline { font-size: .52rem; letter-spacing: .09em; }
 }
 @media (max-width: 420px) {
   .primary-nav a { padding-inline: .42rem; font-size: .74rem; }
