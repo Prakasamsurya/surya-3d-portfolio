@@ -1,8 +1,19 @@
 import { useEffect, useRef } from "react";
+import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { MathUtils, type Group } from "three";
 
 const SECTION_IDS = ["intro", "skills", "experience", "projects", "ai", "education", "contact"] as const;
+const TEAL = "#4DC9C0";
+const AMBER = "#FFB46B";
+const CREAM = "#F5F2EA";
+const DARK = "#172124";
+
+function Label({ children, position, color = CREAM, fontSize = 0.16 }: {
+  children: string; position: [number, number, number]; color?: string; fontSize?: number;
+}) {
+  return <Text position={position} fontSize={fontSize} color={color} anchorX="center" anchorY="middle" outlineWidth={0.008} outlineColor={DARK}>{children}</Text>;
+}
 
 function IntroForm() {
   return (
@@ -270,25 +281,26 @@ export default function ScrollStoryScene() {
       const blend = span > 0 ? MathUtils.clamp((scrollY.current - measuredOffsets[lower]) / span, 0, 1) : 0;
       sectionProgress = lower + MathUtils.smoothstep(blend, 0, 1);
     }
+    const mobile = state.size.width <= 760;
     const camera = state.camera;
-    const cameraX = 1.15 + Math.sin(sectionProgress * 0.92) * 0.58;
-    const cameraY = 0.18 + Math.cos(sectionProgress * 0.8) * 0.28;
-    const cameraZ = 8.4 - Math.sin(sectionProgress * Math.PI / 6) * 0.8;
+    const cameraX = mobile ? 0.65 : 1.15 + Math.sin(sectionProgress * 0.92) * 0.38;
+    const cameraY = mobile ? -0.1 : 0.18 + Math.cos(sectionProgress * 0.8) * 0.2;
+    const cameraZ = mobile ? 10.2 : 8.8 - Math.sin(sectionProgress * Math.PI / 6) * 0.45;
     camera.position.x = MathUtils.damp(camera.position.x, cameraX, 1.8, delta);
     camera.position.y = MathUtils.damp(camera.position.y, cameraY, 1.8, delta);
     camera.position.z = MathUtils.damp(camera.position.z, cameraZ, 1.8, delta);
-    camera.lookAt(0.45 + Math.sin(sectionProgress * 0.65) * 0.2, 0, 0);
+    camera.lookAt(mobile ? 1.05 : 0.45 + Math.sin(sectionProgress * 0.65) * 0.15, 0, 0);
 
     groups.current.forEach((group, index) => {
       if (!group) return;
       const distance = Math.abs(sectionProgress - index);
-      const visibility = 1 - MathUtils.smoothstep(distance, 0.18, 0.95);
-      const targetScale = 0.001 + visibility * (index === 0 ? 0.92 : 0.78);
+      const visibility = 1 - MathUtils.smoothstep(distance, 0.12, 0.82);
+      const targetScale = 0.001 + visibility * (index === 0 ? 0.9 : 0.84);
       group.scale.setScalar(MathUtils.damp(group.scale.x, targetScale, 5, delta));
-      group.rotation.y += delta * (0.12 + visibility * 0.22) * (index % 2 === 0 ? 1 : -1);
-      group.rotation.x = MathUtils.damp(group.rotation.x, Math.sin(state.clock.elapsedTime * 0.45 + index) * 0.08, 2, delta);
-      group.position.y = Math.sin(state.clock.elapsedTime * 0.7 + index * 1.4) * 0.13 + (1 - visibility) * -0.35;
-      group.visible = distance < 1.15 || targetScale > 0.02;
+      group.rotation.y = MathUtils.damp(group.rotation.y, Math.sin(state.clock.elapsedTime * 0.18 + index) * 0.12, 2, delta);
+      group.rotation.x = MathUtils.damp(group.rotation.x, Math.sin(state.clock.elapsedTime * 0.25 + index) * 0.035, 2, delta);
+      group.position.y = Math.sin(state.clock.elapsedTime * 0.5 + index * 1.4) * 0.07 + (1 - visibility) * -0.22;
+      group.visible = distance < 1.05 || targetScale > 0.02;
     });
   });
 
