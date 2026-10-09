@@ -1,6 +1,6 @@
 # Surya Prakasam — 3D Portfolio
 
-> **Status: Stage 3 — 3D greybox in progress.** The React + TypeScript + Vite foundation, typed content layer, and first connected-room scene with scroll-driven camera are committed. Stage 1 and 2 builds passed; the current 3D build and visual route review are pending. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
+> **Status: Stage 3 — 3D greybox implemented; visual review pending.** The React + TypeScript + Vite foundation, typed content layer, connected-room scene and scroll-driven camera are committed. GitHub Actions production build passes for the current scene. Browser rendering and camera-route review have not yet been performed. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## 1. Project overview and vision
 
@@ -34,18 +34,18 @@ Full rules, restrictions and accessibility requirements are in [DESIGN.md](DESIG
 6. Education
 7. Contact
 
-Station positions, camera coordinates and the exact route are **not decided**. They are settled at the 3D greybox stage.
+Initial greybox station positions and camera route are implemented in `src/scene/roomLayout.ts` and `src/scene/ScrollCamera.tsx`. They remain subject to visual review.
 
 ## 4. Proposed technology stack
 
-These are proposals, not evidence that anything is installed or implemented. Compatibility must be verified at the relevant implementation stage before installing.
+The implemented foundation uses the following stack; later-stage choices may be adjusted only when documented and verified.
 
 - React
 - TypeScript
 - Vite
 - Three.js through React Three Fiber
 - Drei (Three.js helpers, where appropriate)
-- GSAP and ScrollTrigger (if appropriate for coordinated scroll-driven camera movement)
+- Native scroll progress and camera interpolation (implemented; GSAP is not currently included)
 
 All are free to develop with. Details are in [ARCHITECTURE.md](ARCHITECTURE.md).
 
@@ -67,7 +67,7 @@ Stage boundaries and review gates are defined in [WORKFLOW.md](WORKFLOW.md). Sta
 
 ## 6. Current project status
 
-Stage 0 documentation is committed. Stage 1 foundation files are now committed to `main`; GitHub Actions build verification is pending. No 3D scene exists yet. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
+Stage 0 documentation is committed. Stage 1 foundation, Stage 2 typed content, and the first Stage 3 connected-room greybox are committed to `main`. The current Stage 3 GitHub Actions production build passed; visual route review remains pending. See [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## 7. How the project is developed, reviewed and verified
 
