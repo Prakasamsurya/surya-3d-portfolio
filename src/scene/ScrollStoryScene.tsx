@@ -88,7 +88,7 @@ function ProjectsForm() {
         { p: [-1.15, 0.45, 0.25] as [number, number, number], r: [0.12, -0.24, 0.1] as [number, number, number], c: "#2F7F86" },
         { p: [0.25, 0.15, -0.15] as [number, number, number], r: [-0.18, 0.32, -0.08] as [number, number, number], c: "#F4B56D" },
         { p: [1.25, -0.35, 0.25] as [number, number, number], r: [0.2, 0.1, 0.22] as [number, number, number], c: "#8E91FF" },
-      ].map((item, i) => (
+      ].map((item) => (
         <group key={item.c} position={item.p} rotation={item.r}>
           <mesh>
             <boxGeometry args={[1.55, 1.95, 0.12]} />
